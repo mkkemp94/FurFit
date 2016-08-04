@@ -34,8 +34,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void ExtrasSwitch(View view){
+    public void extrasSwitch(View view){
         Intent intent = new Intent(this, ExtrasActivity.class);
+        //Bundle bundle = new Bundle();
+        //intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    public void charSwitch(View view){
+        Intent intent = new Intent(this, CharSelectActivity.class);
         //Bundle bundle = new Bundle();
         //intent.putExtras(bundle);
         startActivity(intent);

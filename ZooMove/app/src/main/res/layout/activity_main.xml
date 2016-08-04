@@ -33,19 +33,34 @@
         android:layout_height="wrap_content"
         android:text="Run Button"
         android:id="@+id/runButton"
+        android:onClick="runSwitch"
         android:layout_below="@+id/generalButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
-        android:onClick="runSwitch"/>
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Muscle Button"
         android:id="@+id/muscleButton"
-        android:layout_marginTop="38dp"
-        android:layout_below="@+id/runButton"
-        android:layout_centerHorizontal="true"
         android:onClick="muscleSwitch"
-        />
+        android:layout_below="@+id/runButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Extras Button"
+        android:id="@+id/extrasButton"
+        android:onClick="extrasSwitch"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/generalButton" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/char1"
+        android:layout_above="@+id/extrasButton"
+        android:layout_centerHorizontal="true"
+        android:onClick="charSwitch" />
 </RelativeLayout>
