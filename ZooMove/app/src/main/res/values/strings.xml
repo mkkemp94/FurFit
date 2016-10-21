@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ZooMove</string>
+    <string name="app_name">FurFit</string>
 
     <string-array name="characters">
         <item>Bear</item>
