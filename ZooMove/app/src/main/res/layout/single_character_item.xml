@@ -9,5 +9,7 @@
         android:id="@+id/character_image_view"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        style="@style/myImageView" />
+        style="@style/myImageView"
+        android:adjustViewBounds="false"
+        android:cropToPadding="true" />
 </RelativeLayout>

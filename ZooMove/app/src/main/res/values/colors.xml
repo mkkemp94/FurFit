@@ -2,9 +2,9 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff4081</color>
 
     <color name="image_border_start">#40990000</color>
-    <color name="image_border_end">#FF660000</color>
-    <color name="image_border_center">#FFFF3333</color>
+    <color name="image_border_end">#660000</color>
+    <color name="image_border_center">#ff3333</color>
 </resources>
