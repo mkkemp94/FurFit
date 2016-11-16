@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">ZooMove</string>
+    <string name="app_name">FurFit</string>
+
+    <string-array name="characters">
+        <item>Bear</item>
+        <item>Dog</item>
+        <item>Falcon</item>
+        <item>Fox</item>
+        <item>Horse</item>
+        <item>Kangaroo</item>
+        <item>Koala</item>
+        <item>Ostrich</item>
+        <item>Tiger</item>
+    </string-array>
+
 </resources>
