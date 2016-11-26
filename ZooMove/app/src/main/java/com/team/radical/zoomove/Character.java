@@ -1,38 +1,33 @@
 package com.team.radical.zoomove;
 
-import android.widget.Checkable;
-
 /**
- * Created by kempm on 8/18/2016.
+ * The Character object holds data for each character in the game.
+ * Each character has one Character Object.
  */
-public class Character implements Checkable
+public class Character  //} implements Checkable
 {
 
-    int id;
-    boolean checked;
-    String name;
+    //int id;
+    private final String name;
+    private boolean isSelected = false;
+    private final int imageResource;
 
-    Character (int id, String name)
+    Character (String name, int imageResource)
     {
-        this.id = id;
         this.name = name;
+        this.imageResource = imageResource;
     }
 
-    @Override
-    public void setChecked(boolean checked) {
-        this.checked = checked;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public boolean isChecked() {
-        return checked;
+    public int getImageResource() {
+        return imageResource;
     }
 
-    private void refreshDrawableState() {
-    }
+    public boolean getIsSelected() { return isSelected; }
 
-    @Override
-    public void toggle() {
-        setChecked(!checked);
-    }
+    public void toggleSelected() { isSelected = !isSelected; }
+
 }
