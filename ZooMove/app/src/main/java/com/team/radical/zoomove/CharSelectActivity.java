@@ -16,6 +16,9 @@ import android.widget.Toast;
  */
 public class CharSelectActivity extends AppCompatActivity {
 
+    TextView textView;
+    CharSelectAdapter charSelectAdapter;
+
     /**
      * Puts a grid view on the character select screen
      * @param savedInstanceState
@@ -26,42 +29,59 @@ public class CharSelectActivity extends AppCompatActivity {
 
         // Make grid. Set adapter to provide data.
         GridView gridview = (GridView) findViewById(R.id.gridView);
-        final CharacterSelectAdapter characterSelectAdapter = new CharacterSelectAdapter(this, allCharacters);
-        gridview.setAdapter(characterSelectAdapter);
+        charSelectAdapter = new CharSelectAdapter(this, allCharacters);
+        gridview.setAdapter(charSelectAdapter);
 
-        final TextView textView = (TextView) findViewById(R.id.tv_selected_character);
+        // Displays which character is currently selected
+        textView = (TextView) findViewById(R.id.tv_selected_character);
+
+        // Select the first character by default
+        // TODO: Eventually make the default selection be the character in play
+        for (Character ch : allCharacters) { ch.deselect(); }
+        allCharacters[0].select();
 
         // When an item is clicked.
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
 
-                // Toast message for position tapped
-                Toast.makeText(CharSelectActivity.this, "" + position,
-                        Toast.LENGTH_SHORT).show();
-
-                // Character at position
-                Character character = allCharacters[position];
-
-                // Toggle this character's selection
-                character.toggleSelected();
-
-                // If selcted, display message
-                if (character.getIsSelected()) {
-                    textView.setText("Character at position " + position + " is selected.");
-                }
-
-                // Redraw grid
-                characterSelectAdapter.notifyDataSetChanged();
+                // Select that character. Deselect all other characters.
+                selectCharacter(position);
             }
         });
 
     }
 
     /**
+     * Select character on tap. Deselect all others.
+     * Only one character should have isSelected set to true.
+     */
+    private void selectCharacter(int position) {
+
+        // Toast message for position tapped
+        Toast.makeText(CharSelectActivity.this, "" + position,
+                Toast.LENGTH_SHORT).show();
+
+        // If selcted, display message
+        textView.setText("Character at position " + position + " is selected.");
+
+        // Deselect all characters
+        for (Character ch : allCharacters) {
+            ch.deselect();
+        }
+
+        // Select the character that was tapped
+        Character thisCharacter = allCharacters[position];
+        thisCharacter.select();
+
+        // Redraw grid
+        charSelectAdapter.notifyDataSetChanged();
+    }
+
+    /**
      * An array holding all the characters.
      */
-    private Character[] allCharacters = {
+    public static Character[] allCharacters = {
             new Character("Beedrill", R.drawable.beedrill),
             new Character("Charizard", R.drawable.charizardy),
             new Character("Delphox", R.drawable.delphox),
@@ -104,8 +124,9 @@ public class CharSelectActivity extends AppCompatActivity {
     public void statsButton(View view)
     {
         Intent intent = new Intent(this, StatsActivity.class);
-        //Bundle bundle = new Bundle();
-        //intent.putExtras(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable();
+//        intent.putExtras(bundle);
         startActivity(intent);
     }
 }
@@ -117,12 +138,12 @@ public class CharSelectActivity extends AppCompatActivity {
 //    /**
 //     * Class for drawing character select grid
 //     */
-//    class CharacterSelectAdapter extends BaseAdapter {
+//    class CharSelectAdapter extends BaseAdapter {
 //
 //        private Context mContext;
 //        private final Character[] characters;
 //
-//        public CharacterSelectAdapter(Context c, Character[] characters) {
+//        public CharSelectAdapter(Context c, Character[] characters) {
 //            mContext = c;
 //            this.characters = characters;
 //        }
@@ -213,7 +234,7 @@ public class CharSelectActivity extends AppCompatActivity {
 
 
 //    GridView character_grid;
-//    CharacterSelectAdapter character_select_adapter;
+//    CharSelectAdapter character_select_adapter;
 //    ArrayList<Character> character_array_list;
 //
 //    // TEMPORARY STRING ARRAY OF CHARACTER NAMES
@@ -237,7 +258,7 @@ public class CharSelectActivity extends AppCompatActivity {
 //        character_grid = (GridView) findViewById(R.id.gridView);
 //
 //        // ADAPTER SET UP
-//        character_select_adapter = new CharacterSelectAdapter(this);
+//        character_select_adapter = new CharSelectAdapter(this);
 //        character_grid.setAdapter(character_select_adapter);
 //
 //
@@ -264,14 +285,14 @@ public class CharSelectActivity extends AppCompatActivity {
 
 
 
-//    class CharacterSelectAdapter extends BaseAdapter
+//    class CharSelectAdapter extends BaseAdapter
 //    {
 //        Context context;
 //
 //        /**
 //         * Initializes characterArrayList of character_string_list.
 //         */
-//        CharacterSelectAdapter(Context context) {
+//        CharSelectAdapter(Context context) {
 //            this.context = context;
 //            character_array_list = new ArrayList<Character>();
 //

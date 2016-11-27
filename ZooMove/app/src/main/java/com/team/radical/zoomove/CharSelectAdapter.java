@@ -15,21 +15,22 @@ import android.widget.TextView;
 /**
  * Class for drawing character select grid
  */
-class CharacterSelectAdapter extends BaseAdapter {
+class CharSelectAdapter extends BaseAdapter {
 
     private Context mContext;
-    private final Character[] characters;
+    private final Character[] characterArray;
 
-    public CharacterSelectAdapter(Context c, Character[] characters) {
-        mContext = c;
-        this.characters = characters;
+    public CharSelectAdapter(Context c, Character[] characterArray) {
+        this.mContext = c;
+        this.characterArray = characterArray;
     }
 
     /**
      * Count of character icons array
+     * Not really used
      */
     public int getCount() {
-        return characterIconArray.length;
+        return 9;
     }
 
     /**
@@ -55,51 +56,41 @@ class CharacterSelectAdapter extends BaseAdapter {
 
         // If there's nothing inside convert view yet
         if (convertView == null) {
+
+            // Inflate the single character item layout
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
             convertView = layoutInflater.inflate(R.layout.item_single_character, null);
 
-            // Initialize character image
+            // Get this image view and text view
             final ImageView characterIcon = // new ImageView(mContext);
                     (ImageView) convertView.findViewById(R.id.iv_character_icon);
 
             final TextView characterName =
                     (TextView) convertView.findViewById(R.id.tv_char_name);
 
-            // Store character image into a view holder
+            // Store character image and name into view holder
             final ViewHolder viewHolder = new ViewHolder(characterIcon, characterName);
             convertView.setTag(viewHolder);
         }
 
-        // Get character icon from view holder
+        // Get character icon and name from view holder
         final ViewHolder viewHolder = (ViewHolder) convertView.getTag();
 
         // Get the character at this position
-        Character character = characters[position];
+        Character thisCharacter = characterArray[position];
 
         // Mark character as favorited or not
-        if (character.getIsSelected()) {
+        if (thisCharacter.getIsSelected())
             viewHolder.characterIcon.setImageResource(R.drawable.pokeball);
-        } else {
-            viewHolder.characterIcon.setImageResource(characterIconArray[position]);
-        }
+        else viewHolder.characterIcon.setImageResource(thisCharacter.getImageResource());
 
         // Display the character's name
-        viewHolder.characterName.setText(character.getName());
+        viewHolder.characterName.setText(thisCharacter.getName());
 
         // Return the updated view
         return convertView;
     }
 
-    /**
-     * References to our images
-     */
-    private Integer[] characterIconArray = {
-            R.drawable.beedrill, R.drawable.charizardy,
-            R.drawable.delphox, R.drawable.flareon,
-            R.drawable.jolteon, R.drawable.squirtle,
-            R.drawable.mareep, R.drawable.pidgeot,
-            R.drawable.staryu
-    };
 
     /**
      * Class that holds reference to subview. Used for recycling
@@ -121,12 +112,37 @@ class CharacterSelectAdapter extends BaseAdapter {
 
 
 
+//        viewHolder.characterIcon.setImageResource(thisCharacter.getIsSelected() ? R.drawable.pokeball : thisCharacter.getImageResource());
+
+//        if (thisCharacter.getIsSelected()) {
+//            viewHolder.characterIcon.setImageResource(R.drawable.pokeball);
+//        } else {
+//            viewHolder.characterIcon.setImageResource(thisCharacter.getImageResource()); //characterIconArray[position]);
+//        }
+
+
 //        // To hold this specific icon
 //        ImageView imageView;
 //        TextView textView;
+
+
+
+/**
+ * References to our images
+ */
+//    private Integer[] characterIconArray = {
+//            R.drawable.beedrill, R.drawable.charizardy,
+//            R.drawable.delphox, R.drawable.flareon,
+//            R.drawable.jolteon, R.drawable.squirtle,
+//            R.drawable.mareep, R.drawable.pidgeot,
+//            R.drawable.staryu
+//    };
+
+
+
 //
 //
-//        final Character character = characters[position];
+//        final Character character = characterArray[position];
 //
 //        if (convertView == null) {
 //

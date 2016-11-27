@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FurFit</string>
 
-    <string-array name="characters">
+    <string-array name="characterArray">
         <item>Bear</item>
         <item>Dog</item>
         <item>Falcon</item>

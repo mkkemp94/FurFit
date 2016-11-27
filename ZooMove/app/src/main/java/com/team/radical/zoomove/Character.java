@@ -7,10 +7,9 @@ package com.team.radical.zoomove;
 public class Character  //} implements Checkable
 {
 
-    //int id;
-    private final String name;
+    private String name;
+    private int imageResource;
     private boolean isSelected = false;
-    private final int imageResource;
 
     Character (String name, int imageResource)
     {
@@ -21,13 +20,14 @@ public class Character  //} implements Checkable
     public String getName() {
         return name;
     }
+    public void setName(String name) { this.name = name; }
 
     public int getImageResource() {
         return imageResource;
     }
 
     public boolean getIsSelected() { return isSelected; }
-
-    public void toggleSelected() { isSelected = !isSelected; }
+    public void deselect() { isSelected = false; }
+    public void select() { isSelected = true; }
 
 }

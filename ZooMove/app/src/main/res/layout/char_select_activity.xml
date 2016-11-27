@@ -37,7 +37,7 @@
         />
 
 
-    <!-- Lists off the selected characters -->
+    <!-- Lists off the selected characterArray -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
