@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import static com.team.radical.zoomove.CharSelectActivity.allCharacters;
+
 /**
  * Created by kempm on 8/10/2016.
  */
@@ -44,7 +46,7 @@ public class StatsActivity extends AppCompatActivity {
      * Only one character should have isSelected set to true.
      */
     private void getCharacter() {
-        for (Character ch : CharSelectActivity.allCharacters) {
+        for (Character ch : allCharacters) {
             if (ch.getIsSelected()) {
                 Toast.makeText(this, "Character " + ch.getName() + " is selected.", Toast.LENGTH_LONG).show();
                 thisCharacter = ch;
@@ -57,6 +59,13 @@ public class StatsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         //Bundle bundle = new Bundle();
         //intent.putExtras(bundle);
+
+        for (Character ch : allCharacters) {
+            if (ch.getIsSelected()) {
+                MainActivity.currentCharacter = ch;
+            }
+        }
+
         startActivity(intent);
     }
 
@@ -65,6 +74,7 @@ public class StatsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CharSelectActivity.class);
         //Bundle bundle = new Bundle();
         //intent.putExtras(bundle);
+
         startActivity(intent);
     }
 

@@ -1,13 +1,17 @@
 package com.team.radical.zoomove;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static com.team.radical.zoomove.MainActivity.currentCharacter;
 
 /**
  * This activity holds all characters to be selected as "Current Character"
@@ -60,7 +64,7 @@ public class CharSelectActivity extends AppCompatActivity {
 
         // Select the character with the SAME IMAGE is the current character
         for (Character ch : allCharacters) {
-            if (ch.getImageResource() == MainActivity.currentCharacter.getImageResource()) {
+            if (ch.getImageResource() == currentCharacter.getImageResource()) {
                 ch.select();
                 break;
             }
@@ -114,10 +118,44 @@ public class CharSelectActivity extends AppCompatActivity {
      */
     public void backButton(View view)
     {
-        Intent intent = new Intent(this, MainActivity.class);
+        final Intent backIntent = new Intent(this, MainActivity.class);
         //Bundle bundle = new Bundle();
         //intent.putExtras(bundle);
-        startActivity(intent);
+
+        for (Character ch : allCharacters) {
+            if (ch.getIsSelected()) {
+                if (ch.getImageResource() == currentCharacter.getImageResource()) {
+                    // If currentCharacter is already selected
+                    startActivity(backIntent);
+                } else {
+
+                    // Trying to go back without saving character
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CharSelectActivity.this);
+                    builder.setMessage("Current selection will not be saved.")
+                            .setTitle("Cancel character select?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Go back to main activity with no changes
+                                    startActivity(backIntent);
+                                }
+                            })
+                            .setNegativeButton("Keep Choosing", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Stay on character select screen
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                }
+            }
+        }
+
+
     }
 
     /**
@@ -130,9 +168,10 @@ public class CharSelectActivity extends AppCompatActivity {
         //Bundle bundle = new Bundle();
         //intent.putExtras(bundle);
 
+        // Find the character that is selected and set it to currentCharacter
         for (Character ch : allCharacters) {
             if (ch.getIsSelected()) {
-                MainActivity.currentCharacter = ch;
+                currentCharacter = ch;
             }
         }
 

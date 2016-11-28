@@ -8,15 +8,13 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    static Character currentCharacter;
+    static Character currentCharacter = new Character("Beedrill", R.drawable.beedrill);
     ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        currentCharacter = new Character("Beedrill", R.drawable.beedrill);
 
         imageView = (ImageView) findViewById(R.id.iv_current_character);
         imageView.setImageResource(currentCharacter.getImageResource());
