@@ -24,7 +24,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3">
+        android:layout_weight="5"
+        android:gravity="center_horizontal">
 
         <!-- Character icon -->
         <ImageView
@@ -42,11 +43,10 @@
             android:layout_gravity="center_horizontal"
             android:id="@+id/et_character_name" />
 
-        <!-- Character LV -->
+        <!--  Level -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -63,126 +63,236 @@
 
         </LinearLayout>
 
+        <!-- Experience -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="EXP: " />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tv_experience"
+                android:text="0" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 
 
 
+    <!--&lt;!&ndash; Character Level and EXP&ndash;&gt;-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="2"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:orientation="vertical">-->
+
+        <!--&lt;!&ndash;  Level &ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" >-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                <!--android:text="LV: " />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                <!--android:id="@+id/character_level"-->
+                <!--android:text="0" />-->
+
+        <!--</LinearLayout>-->
+
+        <!--&lt;!&ndash; Experience &ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" >-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                <!--android:text="EXP: " />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                <!--android:id="@+id/tv_experience"-->
+                <!--android:text="0" />-->
+
+        <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
 
 
 
+
+    <!-- Time spent with character -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Time Spent:"
+        android:id="@+id/plain_text_time"
+        android:layout_gravity="center"/>
 
     <!-- Times -->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="4"
         android:gravity="center" >
 
 
-        <!-- Time spent with character -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Time Spent:" />
 
 
-        <!-- Time spent doing general activity -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/general_time_layout" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="General: "
-                android:id="@+id/plain_text_general" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/tv_general_time"
-                android:text="0" />
-
-        </LinearLayout>
+        <!-- Time table -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
 
 
-        <!-- Time spent running -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/running_time_layout" >
+            <!-- First row of time table -->
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Running: "
-                android:id="@+id/plain_text_running" />
+                <!-- Time spent doing general activity -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/general_time_layout"
+                    android:gravity="center"
+                    >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/tv_running_time"
-                android:text="0" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="General: "
+                        android:id="@+id/plain_text_general" />
 
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:id="@+id/tv_general_time"
+                        android:text="0" />
+
+                </LinearLayout>
+
+                <!-- Time spent running -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/running_time_layout"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Running: "
+                        android:id="@+id/plain_text_running" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:id="@+id/tv_running_time"
+                        android:text="0" />
+
+                </LinearLayout>
+
+            </TableRow>
 
 
-        <!-- Time spent strength training -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/strength_time_layout" >
+            <!-- Second row of time table -->
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Strength: "
-                android:id="@+id/plain_text_strength" />
+                <!-- Time spent strength training -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/strength_time_layout"
+                    android:gravity="center" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/tv_strength_time"
-                android:text="0" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Strength: "
+                        android:id="@+id/plain_text_strength" />
 
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:id="@+id/tv_strength_time"
+                        android:text="0" />
 
+                </LinearLayout>
 
-        <!-- Total time spent exercising with character -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/total_time_layout" >
+                <!-- Total time spent exercising with character -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/total_time_layout"
+                    android:gravity="center" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Total: "
-                android:id="@+id/plain_text_total_time" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Total: "
+                        android:id="@+id/plain_text_total_time" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/tv_total_time"
-                android:text="0"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:id="@+id/tv_total_time"
+                        android:text="0"/>
 
-        </LinearLayout>
+                </LinearLayout>
+
+            </TableRow>
+
+        </TableLayout>
 
     </LinearLayout>
 
@@ -231,6 +341,67 @@
 
 
 
+    <!--&lt;!&ndash; Character LV and EXP&ndash;&gt;-->
+    <!--<TableLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="2"-->
+    <!--android:gravity="center">-->
+
+    <!--&lt;!&ndash; First row of level table &ndash;&gt;-->
+    <!--<TableRow-->
+    <!--android:id="@+id/levelRow"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center" >-->
+
+    <!--&lt;!&ndash; Character Level &ndash;&gt;-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+    <!--android:text="LV: " />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+    <!--android:id="@+id/character_level"-->
+    <!--android:text="0" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--&lt;!&ndash; Character Experience &ndash;&gt;-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+    <!--android:text="EXP: " />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+    <!--android:id="@+id/tv_experience"-->
+    <!--android:text="0" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--</TableRow>-->
+
+    <!--</TableLayout>
 
 
 
@@ -239,7 +410,10 @@
 
 
 
-<!--
+
+
+
+<!-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
