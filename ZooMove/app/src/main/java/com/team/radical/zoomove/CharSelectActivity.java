@@ -26,12 +26,42 @@ public class CharSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.char_select_activity);
 
+        // Select the first character by default
+        getCharacter();
+
         // Load grid of characters to play
         loadCharacterSelectGrid();
 
-        // Select the first character by default
-        selectDefaultCharacter();
+    }
 
+    /**
+     * Gets selected character to display info.
+     * Check to see if there is a current selected character.
+     * If not, set the selected character to the currentCharacter
+     */
+    private void getCharacter() {
+        for (Character ch : allCharacters) {
+            if (ch.getIsSelected()) {
+                return;
+            }
+        }
+
+        // There is no selected character
+        setDefaultCharacter();
+    }
+
+    /**
+     * Make the default selection be the character in play
+     */
+    private void setDefaultCharacter() {
+
+        // Select the character with the same image as the current character
+        for (Character ch : allCharacters) {
+            if (ch.getImageResource() == currentCharacter.getImageResource()) {
+                ch.select();
+                break;
+            }
+        }
     }
 
     /**
@@ -61,7 +91,7 @@ public class CharSelectActivity extends AppCompatActivity {
      */
     private void selectCharacter(int position) {
 
-        // Deselect all characters
+        // Deselect all other characters
         deselectAllCharacters();
 
         // Select the character that was tapped
@@ -75,27 +105,9 @@ public class CharSelectActivity extends AppCompatActivity {
     /**
      * Sets all characters to be deselected.
      */
-    private void deselectAllCharacters() {
+    public static void deselectAllCharacters() {
         for (Character ch : allCharacters) {
             ch.deselect();
-        }
-    }
-
-    /**
-     * Make the default selection be the character in play
-     * TODO: Is there a better way to do this than to find the one with the same image?
-     */
-    private void selectDefaultCharacter() {
-
-        // Deselect all other characters
-        deselectAllCharacters();
-
-        // Select the character with the SAME IMAGE is the current character
-        for (Character ch : allCharacters) {
-            if (ch.getImageResource() == currentCharacter.getImageResource()) {
-                ch.select();
-                break;
-            }
         }
     }
 
