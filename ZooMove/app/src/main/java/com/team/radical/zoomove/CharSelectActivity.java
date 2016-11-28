@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import static com.team.radical.zoomove.MainActivity.currentCharacter;
 
@@ -18,8 +16,7 @@ import static com.team.radical.zoomove.MainActivity.currentCharacter;
  */
 public class CharSelectActivity extends AppCompatActivity {
 
-    TextView textView;
-    CharSelectAdapter charSelectAdapter;
+    private CharSelectAdapter charSelectAdapter;
 
     /**
      * Puts a grid view on the character select screen
@@ -29,27 +26,59 @@ public class CharSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.char_select_activity);
 
-        // Make grid. Set adapter to provide data.
-        GridView gridview = (GridView) findViewById(R.id.gridView);
-        charSelectAdapter = new CharSelectAdapter(this, allCharacters);
-        gridview.setAdapter(charSelectAdapter);
-
-        // Displays which character is currently selected
-        textView = (TextView) findViewById(R.id.tv_selected_character);
+        // Load grid of characters to play
+        loadCharacterSelectGrid();
 
         // Select the first character by default
         selectDefaultCharacter();
 
-        // When an item is clicked.
+    }
+
+    /**
+     * Load grid of characters. Set adapter to provide data to views.
+     * Upon character tap, select that character.
+     */
+    private void loadCharacterSelectGrid() {
+
+        GridView gridview = (GridView) findViewById(R.id.gridView);
+        charSelectAdapter = new CharSelectAdapter(this, allCharacters);
+        gridview.setAdapter(charSelectAdapter);
+
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
 
-                // Select that character. Deselect all other characters.
+                // On item click, select that character
                 selectCharacter(position);
             }
         });
+    }
 
+    /**
+     * Deselect all characters.
+     * Select the character at the tapped position.
+     * Only one character should be selected at a time.
+     */
+    private void selectCharacter(int position) {
+
+        // Deselect all characters
+        deselectAllCharacters();
+
+        // Select the character that was tapped
+        Character thisCharacter = allCharacters[position];
+        thisCharacter.select();
+
+        // Redraw grid
+        charSelectAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Sets all characters to be deselected.
+     */
+    private void deselectAllCharacters() {
+        for (Character ch : allCharacters) {
+            ch.deselect();
+        }
     }
 
     /**
@@ -57,8 +86,9 @@ public class CharSelectActivity extends AppCompatActivity {
      * TODO: Is there a better way to do this than to find the one with the same image?
      */
     private void selectDefaultCharacter() {
+
         // Deselect all other characters
-        for (Character ch : allCharacters) { ch.deselect(); }
+        deselectAllCharacters();
 
         // Select the character with the SAME IMAGE is the current character
         for (Character ch : allCharacters) {
@@ -67,32 +97,6 @@ public class CharSelectActivity extends AppCompatActivity {
                 break;
             }
         }
-    }
-
-    /**
-     * Select character on tap. Deselect all others.
-     * Only one character should have isSelected set to true.
-     */
-    private void selectCharacter(int position) {
-
-        // Toast message for position tapped
-        Toast.makeText(CharSelectActivity.this, "" + position,
-                Toast.LENGTH_SHORT).show();
-
-        // If selcted, display message
-        textView.setText("Character at position " + position + " is selected.");
-
-        // Deselect all characters
-        for (Character ch : allCharacters) {
-            ch.deselect();
-        }
-
-        // Select the character that was tapped
-        Character thisCharacter = allCharacters[position];
-        thisCharacter.select();
-
-        // Redraw grid
-        charSelectAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -119,40 +123,6 @@ public class CharSelectActivity extends AppCompatActivity {
         final Intent backIntent = new Intent(this, MainActivity.class);
         //Bundle bundle = new Bundle();
         //intent.putExtras(bundle);
-
-//        for (Character ch : allCharacters) {
-//            if (ch.getIsSelected()) {
-//                if (ch.getImageResource() == currentCharacter.getImageResource()) {
-//                    // If currentCharacter is already selected
-//                    startActivity(backIntent);
-//                } else {
-//
-//                    // Trying to go back without saving character
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(CharSelectActivity.this);
-//                    builder.setMessage("Current selection will not be saved.")
-//                            .setTitle("Cancel character select?")
-//                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    // Go back to main activity with no changes
-//                                    startActivity(backIntent);
-//                                }
-//                            })
-//                            .setNegativeButton("Keep Choosing", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    // Stay on character select screen
-//                                    dialog.cancel();
-//                                }
-//                            });
-//
-//                    AlertDialog dialog = builder.create();
-//                    dialog.show();
-//
-//                }
-//            }
-//        }
-
         startActivity(backIntent);
 
     }
@@ -190,6 +160,68 @@ public class CharSelectActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        for (Character ch : allCharacters) {
+//            if (ch.getIsSelected()) {
+//                if (ch.getImageResource() == currentCharacter.getImageResource()) {
+//                    // If currentCharacter is already selected
+//                    startActivity(backIntent);
+//                } else {
+//
+//                    // Trying to go back without saving character
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(CharSelectActivity.this);
+//                    builder.setMessage("Current selection will not be saved.")
+//                            .setTitle("Cancel character select?")
+//                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    // Go back to main activity with no changes
+//                                    startActivity(backIntent);
+//                                }
+//                            })
+//                            .setNegativeButton("Keep Choosing", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    // Stay on character select screen
+//                                    dialog.cancel();
+//                                }
+//                            });
+//
+//                    AlertDialog dialog = builder.create();
+//                    dialog.show();
+//
+//                }
+//            }
+//        }
 
 
 

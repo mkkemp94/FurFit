@@ -8,14 +8,22 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    static Character currentCharacter = new Character("Beedrill", R.drawable.beedrill);
-    ImageView imageView;
+    public static Character currentCharacter = new Character("Beedrill", R.drawable.beedrill);
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Show the current character image
+        loadCurrentCharacter();
+    }
+
+    /**
+     * Loads the current character onto the main screen
+     */
+    private void loadCurrentCharacter() {
         imageView = (ImageView) findViewById(R.id.iv_current_character);
         imageView.setImageResource(currentCharacter.getImageResource());
     }
