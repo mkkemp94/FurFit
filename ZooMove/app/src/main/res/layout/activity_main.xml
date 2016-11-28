@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_current_character"
         android:src="@drawable/char1"
         android:onClick="charSwitch"
         android:scaleType="fitCenter" />

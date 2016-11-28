@@ -36,9 +36,7 @@ public class CharSelectActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.tv_selected_character);
 
         // Select the first character by default
-        // TODO: Eventually make the default selection be the character in play
-        for (Character ch : allCharacters) { ch.deselect(); }
-        allCharacters[0].select();
+        selectDefaultCharacter();
 
         // When an item is clicked.
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -50,6 +48,23 @@ public class CharSelectActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    /**
+     * Make the default selection be the character in play
+     * TODO: Is there a better way to do this than to find the one with the same image?
+     */
+    private void selectDefaultCharacter() {
+        // Deselect all other characters
+        for (Character ch : allCharacters) { ch.deselect(); }
+
+        // Select the character with the SAME IMAGE is the current character
+        for (Character ch : allCharacters) {
+            if (ch.getImageResource() == MainActivity.currentCharacter.getImageResource()) {
+                ch.select();
+                break;
+            }
+        }
     }
 
     /**
@@ -114,6 +129,13 @@ public class CharSelectActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         //Bundle bundle = new Bundle();
         //intent.putExtras(bundle);
+
+        for (Character ch : allCharacters) {
+            if (ch.getIsSelected()) {
+                MainActivity.currentCharacter = ch;
+            }
+        }
+
         startActivity(intent);
     }
 
