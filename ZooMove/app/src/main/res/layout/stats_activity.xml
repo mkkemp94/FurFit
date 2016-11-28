@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/general_time"
+                android:id="@+id/tv_general_time"
                 android:text="0" />
 
         </LinearLayout>
@@ -131,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/running_time"
+                android:id="@+id/tv_running_time"
                 android:text="0" />
 
         </LinearLayout>
@@ -155,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/strength_time"
+                android:id="@+id/tv_strength_time"
                 android:text="0" />
 
         </LinearLayout>
@@ -179,7 +179,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/total_time"
+                android:id="@+id/tv_total_time"
                 android:text="0"/>
 
         </LinearLayout>

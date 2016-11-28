@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static com.team.radical.zoomove.CharSelectActivity.allCharacters;
@@ -18,6 +19,11 @@ public class StatsActivity extends AppCompatActivity {
     EditText editText;
     ImageView imageView;
     Character thisCharacter;
+
+    TextView generalTime;
+    TextView runningTime;
+    TextView strengthTime;
+    TextView totalTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,22 @@ public class StatsActivity extends AppCompatActivity {
         // Displays that character's name
         editText = (EditText) findViewById(R.id.et_character_name);
         editText.setText(thisCharacter.getName());
+
+        // Displays general time
+        generalTime = (TextView) findViewById(R.id.tv_general_time);
+        generalTime.setText( String.valueOf(thisCharacter.getGeneralTime()) );
+
+        // Displays general time
+        runningTime = (TextView) findViewById(R.id.tv_running_time);
+        runningTime.setText( String.valueOf(thisCharacter.getRunningTime()) );
+
+        // Displays general time
+        strengthTime = (TextView) findViewById(R.id.tv_strength_time);
+        strengthTime.setText( String.valueOf(thisCharacter.getStrengthTime()) );
+
+        // Displays general time
+        totalTime = (TextView) findViewById(R.id.tv_total_time);
+        totalTime.setText( String.valueOf(thisCharacter.getTotalTime()) );
 
     }
 

@@ -11,10 +11,18 @@ public class Character  //} implements Checkable
     private int imageResource;
     private boolean isSelected = false;
 
+    private int generalTime;
+    private int runningTime;
+    private int strengthTime;
+    private int totalTime;
+
     Character (String name, int imageResource)
     {
         this.name = name;
         this.imageResource = imageResource;
+        this.generalTime = 100;
+        this.runningTime = 50;
+        this.strengthTime = 20;
     }
 
     public String getName() {
@@ -30,4 +38,16 @@ public class Character  //} implements Checkable
     public void deselect() { isSelected = false; }
     public void select() { isSelected = true; }
 
+    public int getRunningTime() {
+        return runningTime;
+    }
+    public int getGeneralTime() {
+        return generalTime;
+    }
+    public int getStrengthTime() {
+        return strengthTime;
+    }
+    public int getTotalTime() {
+        return runningTime + generalTime + strengthTime;
+    }
 }
