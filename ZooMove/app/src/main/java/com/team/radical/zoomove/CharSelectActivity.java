@@ -171,6 +171,16 @@ public class CharSelectActivity extends AppCompatActivity {
 //        intent.putExtras(bundle);
         startActivity(intent);
     }
+
+    /**
+     * Back button press: got to main menu
+     *
+     */
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
 
 

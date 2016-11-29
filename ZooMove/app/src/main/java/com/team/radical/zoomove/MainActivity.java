@@ -8,6 +8,10 @@ import android.widget.ImageView;
 
 import static com.team.radical.zoomove.CharSelectActivity.deselectAllCharacters;
 
+/**
+ * Main menu for app
+ *
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static Character currentCharacter = new Character("Beedrill", R.drawable.beedrill);
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Loads the current character onto the main screen
+     *
      */
     private void loadCurrentCharacter() {
         imageView = (ImageView) findViewById(R.id.iv_current_character);
@@ -63,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Go to the Character Select screen
+     *
+     */
     public void charSwitch(View view){
         Intent intent = new Intent(this, CharSelectActivity.class);
         //Bundle bundle = new Bundle();
@@ -70,8 +79,17 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Back button press:
+     * Minimize app. The Android system will kill it automatically when necessary.
+     * (Many apps work this way.)
+     *
+     */
     @Override
     public void onBackPressed() {
-
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory( Intent.CATEGORY_HOME );
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
     }
 }

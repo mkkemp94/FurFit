@@ -36,12 +36,26 @@
             />
 
         <!-- Character name -->
-        <EditText
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Character Name"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/et_character_name" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Character Name"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/et_character_name" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:onClick="editCharacterName"/>
+
+        </LinearLayout>
+
 
         <!--  Level -->
         <LinearLayout
@@ -58,8 +72,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/character_level"
-                android:text="0" />
+                android:id="@+id/tv_character_level"
+                android:text="0"
+                 />
 
         </LinearLayout>
 
@@ -79,7 +94,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/tv_experience"
-                android:text="0" />
+                android:text="0"
+                />
 
         </LinearLayout>
 

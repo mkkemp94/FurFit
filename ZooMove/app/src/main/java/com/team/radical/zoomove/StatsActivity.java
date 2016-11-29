@@ -76,12 +76,19 @@ public class StatsActivity extends AppCompatActivity {
         // SET EDIT TEXT TO SHOW CHARACTER NAME
         // HIGHLIGHT THAT NAME
         // LET USER CHANGE THE NAME
+
+        thisCharacter.setName(editText.getText().toString());
+        Toast.makeText(this, "New name saved!", Toast.LENGTH_SHORT).show();
+
+//        TextView charLv = (TextView) findViewById(R.id.tv_character_level);
+//        charLv.setText(characterName);
     }
 
     /**
      * Loads this character's nickname and exercise times
      */
     private void loadStats() {
+
         // Displays this character's name
         editText = (EditText) findViewById(R.id.et_character_name);
         editText.setText(thisCharacter.getName());
@@ -132,6 +139,15 @@ public class StatsActivity extends AppCompatActivity {
         //Bundle bundle = new Bundle();
         //intent.putExtras(bundle);
 
+        startActivity(intent);
+    }
+
+    /**
+     * Back button press: Do nothing
+     */
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CharSelectActivity.class);
         startActivity(intent);
     }
 }
