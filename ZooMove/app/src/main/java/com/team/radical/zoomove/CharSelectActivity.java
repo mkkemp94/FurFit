@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
+import static com.team.radical.zoomove.MainActivity.allCharacters;
 import static com.team.radical.zoomove.MainActivity.currentCharacter;
 
 /**
@@ -22,24 +24,26 @@ public class CharSelectActivity extends AppCompatActivity {
      * Puts a grid view on the character select screen
      * @param savedInstanceState
      */
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.char_select_activity);
 
-        // Select the first character by default
+        Toast.makeText(this, "" + currentCharacter.getName(), Toast.LENGTH_SHORT).show();
+
+        // Select the default character
         getCharacter();
 
-        // Load grid of characters to play
+        // Load grid of characters with default selected
         loadCharacterSelectGrid();
-
     }
 
     /**
-     * Gets selected character to display info.
-     * Check to see if there is a current selected character.
-     * If not, set the selected character to the currentCharacter
+     * Check to see if there is a currently selected character.
+     * If not, select the currentCharacter.
      */
-    private void getCharacter() {
+    private void getCharacter()
+    {
         for (Character ch : allCharacters) {
             if (ch.getIsSelected()) {
                 return;
@@ -47,15 +51,15 @@ public class CharSelectActivity extends AppCompatActivity {
         }
 
         // There is no selected character
-        setDefaultCharacter();
+        selectCurrentCharacter();
     }
 
     /**
-     * Make the default selection be the character in play
+     * Select the currentCharacter from MainActivity.
+     *
      */
-    private void setDefaultCharacter() {
-
-        // Select the character with the same image as the current character
+    private void selectCurrentCharacter()
+    {
         for (Character ch : allCharacters) {
             if (ch.getImageResource() == currentCharacter.getImageResource()) {
                 ch.select();
@@ -65,11 +69,10 @@ public class CharSelectActivity extends AppCompatActivity {
     }
 
     /**
-     * Load grid of characters. Set adapter to provide data to views.
-     * Upon character tap, select that character.
+     * Load grid of characters.
      */
-    private void loadCharacterSelectGrid() {
-
+    private void loadCharacterSelectGrid()
+    {
         GridView gridview = (GridView) findViewById(R.id.gridView);
         charSelectAdapter = new CharSelectAdapter(this, allCharacters);
         gridview.setAdapter(charSelectAdapter);
@@ -78,8 +81,8 @@ public class CharSelectActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
 
-                // On item click, select that character
-                selectCharacter(position);
+                // On character tap, select that character
+                selectTappedCharacter(position);
             }
         });
     }
@@ -89,13 +92,13 @@ public class CharSelectActivity extends AppCompatActivity {
      * Select the character at the tapped position.
      * Only one character should be selected at a time.
      */
-    private void selectCharacter(int position) {
-
+    private void selectTappedCharacter(int position)
+    {
         // Deselect all other characters
         deselectAllCharacters();
 
         // Select the character that was tapped
-        Character thisCharacter = allCharacters[position];
+        Character thisCharacter = allCharacters.get(position);
         thisCharacter.select();
 
         // Redraw grid
@@ -105,30 +108,15 @@ public class CharSelectActivity extends AppCompatActivity {
     /**
      * Sets all characters to be deselected.
      */
-    public static void deselectAllCharacters() {
+    public static void deselectAllCharacters()
+    {
         for (Character ch : allCharacters) {
             ch.deselect();
         }
     }
 
     /**
-     * An array holding all the characters.
-     */
-    public static Character[] allCharacters = {
-            new Character("Beedrill", R.drawable.beedrill),
-            new Character("Charizard", R.drawable.charizardy),
-            new Character("Delphox", R.drawable.delphox),
-            new Character("Flareon", R.drawable.flareon),
-            new Character("Jolteon", R.drawable.jolteon),
-            new Character("Squirtle", R.drawable.squirtle),
-            new Character("Mareep", R.drawable.mareep),
-            new Character("Pidgeot", R.drawable.pidgeot),
-            new Character("Staryu", R.drawable.staryu)
-    };
-
-    /**
-     * Go back to the main menu without changing Current Character
-     * @param view
+     * Go back to main menu without changing currentCharacter.
      */
     public void backButton(View view)
     {
@@ -140,8 +128,7 @@ public class CharSelectActivity extends AppCompatActivity {
     }
 
     /**
-     * Go back to the main menu, saving the newly selected character as Current Character
-     * @param view
+     * Go back to the main menu, saving the selected character as currentCharacter.
      */
     public void chooseButton(View view)
     {
@@ -156,6 +143,9 @@ public class CharSelectActivity extends AppCompatActivity {
             }
         }
 
+//        // Save character via serializable
+//        saveCharacter();
+
         startActivity(intent);
     }
 
@@ -166,18 +156,17 @@ public class CharSelectActivity extends AppCompatActivity {
     public void statsButton(View view)
     {
         Intent intent = new Intent(this, StatsActivity.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable();
-//        intent.putExtras(bundle);
+        //Bundle bundle = new Bundle();
+        //intent.putExtras(bundle);
         startActivity(intent);
     }
 
     /**
      * Back button press: got to main menu
-     *
      */
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

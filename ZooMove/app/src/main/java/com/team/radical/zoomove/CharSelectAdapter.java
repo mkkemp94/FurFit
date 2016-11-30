@@ -12,15 +12,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 /**
  * Class for drawing character select grid
  */
 class CharSelectAdapter extends BaseAdapter {
 
     private Context mContext;
-    private final Character[] characterArray;
+    private final List<Character> characterArray;
 
-    public CharSelectAdapter(Context c, Character[] characterArray) {
+    public CharSelectAdapter(Context c, List<Character> characterArray) {
         this.mContext = c;
         this.characterArray = characterArray;
     }
@@ -77,7 +79,7 @@ class CharSelectAdapter extends BaseAdapter {
         final ViewHolder viewHolder = (ViewHolder) convertView.getTag();
 
         // Get the character at this position
-        Character thisCharacter = characterArray[position];
+        Character thisCharacter = characterArray.get(position);
 
         // Mark character as favorited or not
         if (thisCharacter.getIsSelected())

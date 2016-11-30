@@ -1,12 +1,14 @@
 package com.team.radical.zoomove;
 
+import java.io.Serializable;
+
 /**
  * The Character object holds data for each character in the game.
  * Each character has one Character Object.
  */
-public class Character  //} implements Checkable
-{
+public class Character implements Serializable {
 
+    private int id;
     private String name;
     private int imageResource;
     private boolean isSelected = false;
@@ -16,8 +18,9 @@ public class Character  //} implements Checkable
     private int strengthTime;
     private int totalTime;
 
-    Character (String name, int imageResource)
+    Character (int id, String name, int imageResource)
     {
+        this.id = id;
         this.name = name;
         this.imageResource = imageResource;
         this.generalTime = 100;

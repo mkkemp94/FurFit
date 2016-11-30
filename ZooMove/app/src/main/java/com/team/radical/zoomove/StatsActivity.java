@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.team.radical.zoomove.CharSelectActivity.allCharacters;
+import static com.team.radical.zoomove.MainActivity.allCharacters;
+
 
 /**
  * Created by kempm on 8/10/2016.
@@ -26,7 +27,8 @@ public class StatsActivity extends AppCompatActivity {
     TextView totalTime;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stats_activity);
 
@@ -38,17 +40,17 @@ public class StatsActivity extends AppCompatActivity {
 
         // Display character name and times
         loadStats();
-
     }
 
     /**
      * Gets selected character to display info
      * Only one character should have isSelected set to true.
      */
-    private void getCharacter() {
+    private void getCharacter()
+    {
         for (Character ch : allCharacters) {
             if (ch.getIsSelected()) {
-                Toast.makeText(this, "Character " + ch.getName() + " is selected.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Character " + ch.getName() + " is selected.", Toast.LENGTH_SHORT).show();
                 thisCharacter = ch;
             }
         }
@@ -57,7 +59,8 @@ public class StatsActivity extends AppCompatActivity {
     /**
      * Load the icon for the character being checked out
      */
-    private void loadCharacterImage() {
+    private void loadCharacterImage()
+    {
         try {
             imageView = (ImageView) findViewById(R.id.iv_character_image);
             imageView.setImageResource(thisCharacter.getImageResource());
@@ -72,23 +75,15 @@ public class StatsActivity extends AppCompatActivity {
      */
     public void editCharacterName(View view)
     {
-        // REPLACE CHARACTERNAME TEXT VIEW WITH EDIT TEXT
-        // SET EDIT TEXT TO SHOW CHARACTER NAME
-        // HIGHLIGHT THAT NAME
-        // LET USER CHANGE THE NAME
-
         thisCharacter.setName(editText.getText().toString());
         Toast.makeText(this, "New name saved!", Toast.LENGTH_SHORT).show();
-
-//        TextView charLv = (TextView) findViewById(R.id.tv_character_level);
-//        charLv.setText(characterName);
     }
 
     /**
      * Loads this character's nickname and exercise times
      */
-    private void loadStats() {
-
+    private void loadStats()
+    {
         // Displays this character's name
         editText = (EditText) findViewById(R.id.et_character_name);
         editText.setText(thisCharacter.getName());
@@ -146,7 +141,8 @@ public class StatsActivity extends AppCompatActivity {
      * Back button press: Do nothing
      */
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         Intent intent = new Intent(this, CharSelectActivity.class);
         startActivity(intent);
     }
