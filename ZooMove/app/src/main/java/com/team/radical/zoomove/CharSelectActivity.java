@@ -1,5 +1,6 @@
 package com.team.radical.zoomove;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +9,12 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+import static android.util.Log.v;
 import static com.team.radical.zoomove.MainActivity.allCharacters;
-import static com.team.radical.zoomove.MainActivity.currentCharacter;
 
 /**
  * This activity holds all characters to be selected as "Current Character"
@@ -29,43 +34,8 @@ public class CharSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.char_select_activity);
 
-        Toast.makeText(this, "" + currentCharacter.getName(), Toast.LENGTH_SHORT).show();
-
-        // Select the default character
-        getCharacter();
-
         // Load grid of characters with default selected
         loadCharacterSelectGrid();
-    }
-
-    /**
-     * Check to see if there is a currently selected character.
-     * If not, select the currentCharacter.
-     */
-    private void getCharacter()
-    {
-        for (Character ch : allCharacters) {
-            if (ch.getIsSelected()) {
-                return;
-            }
-        }
-
-        // There is no selected character
-        selectCurrentCharacter();
-    }
-
-    /**
-     * Select the currentCharacter from MainActivity.
-     *
-     */
-    private void selectCurrentCharacter()
-    {
-        for (Character ch : allCharacters) {
-            if (ch.getImageResource() == currentCharacter.getImageResource()) {
-                ch.select();
-                break;
-            }
-        }
     }
 
     /**
@@ -88,16 +58,15 @@ public class CharSelectActivity extends AppCompatActivity {
     }
 
     /**
-     * Deselect all characters.
      * Select the character at the tapped position.
      * Only one character should be selected at a time.
      */
     private void selectTappedCharacter(int position)
     {
-        // Deselect all other characters
+        // Deselect all
         deselectAllCharacters();
 
-        // Select the character that was tapped
+        // Select this character that was tapped
         Character thisCharacter = allCharacters.get(position);
         thisCharacter.select();
 
@@ -128,25 +97,36 @@ public class CharSelectActivity extends AppCompatActivity {
     }
 
     /**
-     * Go back to the main menu, saving the selected character as currentCharacter.
+     * Go back to the main menu, saving the current tapped character as selected.
      */
     public void chooseButton(View view)
     {
         Intent intent = new Intent(this, MainActivity.class);
         //Bundle bundle = new Bundle();
         //intent.putExtras(bundle);
-
-        // Find the character that is selected and set it to currentCharacter
-        for (Character ch : allCharacters) {
-            if (ch.getIsSelected()) {
-                currentCharacter = ch;
-            }
-        }
-
-//        // Save character via serializable
-//        saveCharacter();
+        saveCharacters();
 
         startActivity(intent);
+    }
+
+    /**
+     * Save allCharacters object in current state
+     */
+    public void saveCharacters()
+    {
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput("CF", Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(allCharacters);
+            //os.writeObject(currentCharacter);
+            os.close();
+            fos.close();
+            Toast.makeText(this, "Characters saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            v("chars", e.getMessage());
+        }
     }
 
     /**
@@ -162,7 +142,7 @@ public class CharSelectActivity extends AppCompatActivity {
     }
 
     /**
-     * Back button press: got to main menu
+     * Back button press: go to main menu
      */
     @Override
     public void onBackPressed()
@@ -175,6 +155,70 @@ public class CharSelectActivity extends AppCompatActivity {
 
 
 
+
+
+
+
+
+
+// Find the character that is selected and set it to currentCharacter
+//        for (Character ch : allCharacters) {
+//            if (ch.getIsSelected()) {
+//                currentCharacter = ch;
+//            }
+//        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    /**
+//     * Check to see if there is a currently selected character.
+//     * If not, select the currentCharacter.
+//     */
+//    private void getCharacter()
+//    {
+////        for (Character ch : allCharacters) {
+////            if (ch.getIsSelected()) {
+////                return;
+////            }
+////        }
+//
+//
+//        // There is no selected character
+//        //selectCurrentCharacter();
+//    }
+//
+//    /**
+//     * Select the currentCharacter from MainActivity.
+//     *
+//     */
+//    private void selectCurrentCharacter()
+//    {
+//        for (Character ch : allCharacters) {
+//            if (ch.getImageResource() == currentCharacter.getImageResource()) {
+//                ch.select();
+//                break;
+//            }
+//        }
+//    }
 
 
 

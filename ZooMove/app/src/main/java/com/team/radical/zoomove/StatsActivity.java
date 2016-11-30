@@ -1,5 +1,6 @@
 package com.team.radical.zoomove;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+import static android.util.Log.v;
 import static com.team.radical.zoomove.MainActivity.allCharacters;
 
 
@@ -33,20 +39,14 @@ public class StatsActivity extends AppCompatActivity {
         setContentView(R.layout.stats_activity);
 
         // Gets the character to display on this page
-        getCharacter();
-
-        // Displays that characters image
-        loadCharacterImage();
-
-        // Display character name and times
-        loadStats();
+        getThisCharacter();
     }
 
     /**
-     * Gets selected character to display info
+     * Gets selected character to display image and info
      * Only one character should have isSelected set to true.
      */
-    private void getCharacter()
+    private void getThisCharacter()
     {
         for (Character ch : allCharacters) {
             if (ch.getIsSelected()) {
@@ -54,6 +54,12 @@ public class StatsActivity extends AppCompatActivity {
                 thisCharacter = ch;
             }
         }
+
+        // Displays that characters image
+        loadCharacterImage();
+
+        // Display character name and times
+        loadStats();
     }
 
     /**
@@ -70,13 +76,33 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     /**
-     * Edit character nickname
-     * @param view
+     * Edit character nickname on "Save" button tap.
      */
     public void editCharacterName(View view)
     {
         thisCharacter.setName(editText.getText().toString());
         Toast.makeText(this, "New name saved!", Toast.LENGTH_SHORT).show();
+        saveCharacters();
+    }
+
+    /**
+     * Save allCharacters object in current state
+     */
+    public void saveCharacters()
+    {
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput("CF", Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(allCharacters);
+            //os.writeObject(currentCharacter);
+            os.close();
+            fos.close();
+            Toast.makeText(this, "Characters saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            v("chars", e.getMessage());
+        }
     }
 
     /**
@@ -106,7 +132,7 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     /**
-     * Set this character as currentCharacter and go back to MainActivity
+     * Save this character and go back to MainActivity
      * @param view
      */
     public void chooseButton(View view)
@@ -114,13 +140,6 @@ public class StatsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         //Bundle bundle = new Bundle();
         //intent.putExtras(bundle);
-
-        for (Character ch : allCharacters) {
-            if (ch.getIsSelected()) {
-                MainActivity.currentCharacter = ch;
-            }
-        }
-
         startActivity(intent);
     }
 
@@ -133,7 +152,6 @@ public class StatsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CharSelectActivity.class);
         //Bundle bundle = new Bundle();
         //intent.putExtras(bundle);
-
         startActivity(intent);
     }
 
@@ -147,3 +165,15 @@ public class StatsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
+
+
+
+
+
+
+//for (Character ch : allCharacters) {
+//            if (ch.getIsSelected()) {
+//                MainActivity.currentCharacter = ch;
+//            }
+//        }
