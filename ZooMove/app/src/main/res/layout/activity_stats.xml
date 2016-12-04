@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin">
+
+
+    <!-- Title of screen (common!) -->
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Stats"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+    <!-- Stats -->
+    <LinearLayout
+        android:id="@+id/layout_stats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView5"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- Character icon -->
+        <ImageView
+            android:id="@+id/iv_character_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Character name -->
+        <EditText
+            android:id="@+id/et_character_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:hint="Who Am I?"
+            android:inputType="text"
+            android:maxLength="13"
+            android:maxLines="1" />
+
+        <!-- Save character name -->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="editCharacterName"
+            android:text="Save" />
+
+        <!--  Level -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LV: "
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/tv_character_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
+        <!-- Experience -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXP: "
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/tv_experience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Time spent with character -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_stats"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Time title -->
+        <TextView
+            android:id="@+id/plain_text_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Time Spent:"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+        <!-- Time table -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+
+            <!-- First row of time table -->
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <!-- Time spent doing general activity -->
+                <LinearLayout
+                    android:id="@+id/general_time_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/plain_text_general"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="General: "
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/tv_general_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                </LinearLayout>
+
+                <!-- Time spent running -->
+                <LinearLayout
+                    android:id="@+id/running_time_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/plain_text_running"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Running: "
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/tv_running_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+
+            <!-- Second row of time table -->
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <!-- Time spent strength training -->
+                <LinearLayout
+                    android:id="@+id/strength_time_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/plain_text_strength"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Strength: "
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/tv_strength_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                </LinearLayout>
+
+                <!-- Total time spent exercising with character -->
+                <LinearLayout
+                    android:id="@+id/total_time_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/plain_text_total_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total: "
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/tv_total_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+
+    <!-- Layout for buttons (Common?) -->
+    <RelativeLayout
+        android:id="@+id/button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:onClick="backButton"
+            android:text="Back" />
+
+        <Button
+            android:id="@+id/choose_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:onClick="chooseButton"
+            android:text="Choose" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:orientation="vertical"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:padding="@dimen/activity_vertical_margin" >-->
+
+
+    <!--&lt;!&ndash; Title of screen (common!) &ndash;&gt;--><!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:text="Stats"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:layout_gravity="center_horizontal" />-->
+
+
+    <!--&lt;!&ndash; Stats &ndash;&gt;--><!--<LinearLayout--><!--android:orientation="vertical"--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="5"--><!--android:gravity="center_horizontal">-->
+
+    <!--&lt;!&ndash; Character icon &ndash;&gt;--><!--<ImageView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:id="@+id/iv_character_image"--><!--android:layout_gravity="center_horizontal"--><!--/>-->
+
+    <!--&lt;!&ndash; Character name &ndash;&gt;--><!--<LinearLayout--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:orientation="horizontal">-->
+
+    <!--<EditText--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:hint="Character Name"--><!--android:layout_gravity="center_horizontal"--><!--android:id="@+id/et_character_name" />-->
+
+    <!--<Button--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:text="Save"--><!--android:onClick="editCharacterName"/>-->
+
+    <!--</LinearLayout>-->
+
+
+    <!--&lt;!&ndash;  Level &ndash;&gt;--><!--<LinearLayout--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content" >-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:text="LV: " />-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:id="@+id/tv_character_level"--><!--android:text="0"--><!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--&lt;!&ndash; Experience &ndash;&gt;--><!--<LinearLayout--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content" >-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:text="EXP: " />-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:id="@+id/tv_experience"--><!--android:text="0"--><!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+
+    <!--&lt;!&ndash;&lt;!&ndash; Character Level and EXP&ndash;&gt;&ndash;&gt;--><!--&lt;!&ndash;<LinearLayout&ndash;&gt;--><!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;--><!--&lt;!&ndash;android:layout_height="0dp"&ndash;&gt;--><!--&lt;!&ndash;android:layout_weight="2"&ndash;&gt;--><!--&lt;!&ndash;android:gravity="center"&ndash;&gt;--><!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;--><!--&lt;!&ndash;android:orientation="vertical">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;&lt;!&ndash;  Level &ndash;&gt;&ndash;&gt;--><!--&lt;!&ndash;<LinearLayout&ndash;&gt;--><!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;--><!--&lt;!&ndash;android:layout_height="wrap_content" >&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<TextView&ndash;&gt;--><!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;--><!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;--><!--&lt;!&ndash;android:textAppearance="?android:attr/textAppearanceLarge"&ndash;&gt;--><!--&lt;!&ndash;android:text="LV: " />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<TextView&ndash;&gt;--><!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;--><!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;--><!--&lt;!&ndash;android:textAppearance="?android:attr/textAppearanceLarge"&ndash;&gt;--><!--&lt;!&ndash;android:id="@+id/character_level"&ndash;&gt;--><!--&lt;!&ndash;android:text="0" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;&lt;!&ndash; Experience &ndash;&gt;&ndash;&gt;--><!--&lt;!&ndash;<LinearLayout&ndash;&gt;--><!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;--><!--&lt;!&ndash;android:layout_height="wrap_content" >&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<TextView&ndash;&gt;--><!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;--><!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;--><!--&lt;!&ndash;android:textAppearance="?android:attr/textAppearanceLarge"&ndash;&gt;--><!--&lt;!&ndash;android:text="EXP: " />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<TextView&ndash;&gt;--><!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;--><!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;--><!--&lt;!&ndash;android:textAppearance="?android:attr/textAppearanceLarge"&ndash;&gt;--><!--&lt;!&ndash;android:id="@+id/tv_experience"&ndash;&gt;--><!--&lt;!&ndash;android:text="0" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash; Time spent with character &ndash;&gt;--><!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:text="Time Spent:"--><!--android:id="@+id/plain_text_time"--><!--android:layout_gravity="center"/>-->
+
+    <!--&lt;!&ndash; Times &ndash;&gt;--><!--<LinearLayout--><!--android:orientation="vertical"--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="4"--><!--android:gravity="center" >-->
+
+
+    <!--&lt;!&ndash; Time table &ndash;&gt;--><!--<TableLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:gravity="center">-->
+
+
+    <!--&lt;!&ndash; First row of time table &ndash;&gt;--><!--<TableRow--><!--android:id="@+id/tableRow1"--><!--android:layout_width="fill_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:gravity="center_horizontal" >-->
+
+    <!--&lt;!&ndash; Time spent doing general activity &ndash;&gt;--><!--<LinearLayout--><!--android:orientation="vertical"--><!--android:layout_width="0dp"--><!--android:layout_weight="1"--><!--android:layout_height="wrap_content"--><!--android:id="@+id/general_time_layout"--><!--android:gravity="center"--><!--&gt;-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:text="General: "--><!--android:id="@+id/plain_text_general" />-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:id="@+id/tv_general_time"--><!--android:text="0" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--&lt;!&ndash; Time spent running &ndash;&gt;--><!--<LinearLayout--><!--android:orientation="vertical"--><!--android:layout_width="0dp"--><!--android:layout_weight="1"--><!--android:layout_height="wrap_content"--><!--android:id="@+id/running_time_layout"--><!--android:gravity="center">-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:text="Running: "--><!--android:id="@+id/plain_text_running" />-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:id="@+id/tv_running_time"--><!--android:text="0" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--</TableRow>-->
+
+
+    <!--&lt;!&ndash; Second row of time table &ndash;&gt;--><!--<TableRow--><!--android:id="@+id/tableRow2"--><!--android:layout_width="fill_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:gravity="center_horizontal">-->
+
+    <!--&lt;!&ndash; Time spent strength training &ndash;&gt;--><!--<LinearLayout--><!--android:orientation="vertical"--><!--android:layout_width="0dp"--><!--android:layout_weight="1"--><!--android:layout_height="wrap_content"--><!--android:id="@+id/strength_time_layout"--><!--android:gravity="center" >-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:text="Strength: "--><!--android:id="@+id/plain_text_strength" />-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:id="@+id/tv_strength_time"--><!--android:text="0" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--&lt;!&ndash; Total time spent exercising with character &ndash;&gt;--><!--<LinearLayout--><!--android:orientation="vertical"--><!--android:layout_width="0dp"--><!--android:layout_weight="1"--><!--android:layout_height="wrap_content"--><!--android:id="@+id/total_time_layout"--><!--android:gravity="center" >-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:text="Total: "--><!--android:id="@+id/plain_text_total_time" />-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:id="@+id/tv_total_time"--><!--android:text="0"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</TableRow>-->
+
+    <!--</TableLayout>-->
+
+    <!--</LinearLayout>-->
+
+
+    <!--&lt;!&ndash; Layout for buttons (Common?) &ndash;&gt;--><!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:id="@+id/button_layout"--><!--android:layout_weight="1"--><!--android:orientation="horizontal"--><!--android:gravity="center">-->
+
+    <!--<Button--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:text="Back"--><!--android:id="@+id/back_button"--><!--android:onClick="backButton" />-->
+
+    <!--<Button--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:text="Choose"--><!--android:id="@+id/choose_button"--><!--android:onClick="chooseButton" />-->
+
+    <!--</LinearLayout>-->
+
+
+    <!--</LinearLayout>-->
+
+
+    <!--&lt;!&ndash; Character LV and EXP&ndash;&gt;--><!--<TableLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="2"--><!--android:gravity="center">-->
+
+    <!--&lt;!&ndash; First row of level table &ndash;&gt;--><!--<TableRow--><!--android:id="@+id/levelRow"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:gravity="center" >-->
+
+    <!--&lt;!&ndash; Character Level &ndash;&gt;--><!--<LinearLayout--><!--android:layout_width="0dp"--><!--android:layout_weight="1"--><!--android:layout_height="match_parent"--><!--android:gravity="center">-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:text="LV: " />-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:id="@+id/character_level"--><!--android:text="0" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--&lt;!&ndash; Character Experience &ndash;&gt;--><!--<LinearLayout--><!--android:layout_width="0dp"--><!--android:layout_weight="1"--><!--android:layout_height="match_parent"--><!--android:gravity="center">-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:text="EXP: " />-->
+
+    <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:textAppearance="?android:attr/textAppearanceLarge"--><!--android:id="@+id/tv_experience"--><!--android:text="0" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--</TableRow>-->
+
+    <!--</TableLayout>
+
+
+
+
+
+
+
+
+
+
+
+<!-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin"
+    >
+
+
+    <- Page name -
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stats"
+        android:id="@+id/plain_text_stats"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <!- Character icon -
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/character_image"
+        android:layout_below="@+id/plain_text_stats"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/dog"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        />
+
+    <!- Character name -
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/char_name_layout"
+        android:layout_below="@+id/character_image"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Character Name"
+            android:id="@+id/character_name"
+             />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_character_name"
+            android:src="@android:drawable/ic_menu_edit"
+            android:layout_alignTop="@+id/character_name"
+            android:layout_toEndOf="@+id/character_name"
+            android:onClick="editCharacterName"/>
+
+    </RelativeLayout>
+
+    <!- Character LV -
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/char_lv_layout"
+        android:layout_below="@+id/char_name_layout"
+        android:layout_alignEnd="@+id/plain_text_stats"
+        android:layout_alignStart="@+id/plain_text_stats"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="LV: "
+            android:layout_alignBaseline="@+id/character_level"
+            android:layout_alignBottom="@+id/character_level"
+            android:layout_toStartOf="@+id/character_level" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/character_level"
+            android:text="0"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <!- Time spent with character -
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Time Spent"
+        android:id="@+id/plain_text_time"
+        android:layout_below="@+id/char_lv_layout"
+        android:layout_centerHorizontal="true" />
+
+    <!- Time spent doing general activity -
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/general_time_layout"
+        android:layout_below="@+id/plain_text_time"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="General: "
+            android:id="@+id/plain_text_general"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/general_time"
+            android:text="0"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/plain_text_general"/>
+
+    </LinearLayout>
+
+    <!- Time spent running -
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/running_time_layout"
+        android:layout_below="@+id/general_time_layout"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Running: "
+            android:id="@+id/plain_text_running"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/running_time"
+            android:text="0"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/plain_text_running"/>
+
+    </LinearLayout>
+
+    <!- Time spent strength training -
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/strength_time_layout"
+        android:layout_below="@+id/running_time_layout"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Strength: "
+            android:id="@+id/plain_text_strength"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/strength_time"
+            android:text="0"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/plain_text_strength"/>
+
+    </LinearLayout>
+
+    <!- Total time spent exercising with character -
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/total_time_layout"
+        android:layout_below="@+id/strength_time_layout"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Total: "
+            android:id="@+id/plain_text_total_time"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/total_time"
+            android:text="0"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/plain_text_strength"/>
+
+    </LinearLayout>
+
+    <!- Buttons -
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/button_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:id="@+id/back_button"
+            android:layout_gravity="start"
+            android:onClick="backButton"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose"
+            android:id="@+id/choose_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="chooseButton"/>
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+</RelativeLayout>
+-->

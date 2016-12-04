@@ -36,7 +36,7 @@ public class StatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stats_activity);
+        setContentView(R.layout.activity_stats);
 
         // Gets the character to display on this page
         getThisCharacter();

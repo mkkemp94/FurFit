@@ -32,7 +32,7 @@ public class CharSelectActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.char_select_activity);
+        setContentView(R.layout.activity_character_select);
 
         // Load grid of characters with default selected
         loadCharacterSelectGrid();
@@ -391,7 +391,7 @@ public class CharSelectActivity extends AppCompatActivity {
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.char_select_activity);
+//        setContentView(R.layout.activity_character_select);
 //
 //        // ADD EACH CHARACTER NAME TO AN ARRAY LIST OF CHARACTERS
 //        character_array_list = new ArrayList<Character>();
