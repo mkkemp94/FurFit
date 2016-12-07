@@ -41,7 +41,7 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:hint="Who Am I?"
-            android:inputType="text"
+            android:inputType="textCapWords"
             android:maxLength="13"
             android:maxLines="1" />
 
