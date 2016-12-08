@@ -2,10 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_vertical_margin">
+    android:padding="@dimen/activity_vertical_margin"
+    android:background="@color/stats_screen"
+
+    >
 
 
-    <!-- Title of screen (common!) -->
+    <!-- Title of screen (common!)
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
@@ -14,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:text="Stats"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+    -->
 
     <!-- Layout for buttons (Common?) -->
     <RelativeLayout
@@ -29,15 +32,22 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:onClick="backButton"
-            android:text="Back" />
+            android:text="Back"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"
+            />
 
         <Button
             android:id="@+id/choose_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:onClick="chooseButton"
-            android:text="Choose" />
+            android:text="Choose"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"
+            />
 
     </RelativeLayout>
 
@@ -46,8 +56,6 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/button_layout"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView5"
-        android:gravity=""
         android:orientation="horizontal">
 
         <!-- Stats -->
@@ -56,37 +64,46 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView5"
-            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-
             android:orientation="vertical">
 
             <!-- Character icon -->
             <ImageView
                 android:id="@+id/iv_character_image"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:src="@drawable/charizardy"/>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_character_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="center"
+                    android:hint="Who Am I?"
+                    android:inputType="textCapWords"
+                    android:maxLength="13"
+                    android:maxLines="1" />
+
+                <!-- Save character name -->
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="editCharacterName"
+                    android:text="Save"
+                    android:background="@color/colorAccent"
+                    android:textColor="@color/white"
+                    />
+
+            </LinearLayout>
             <!-- Character name -->
-            <EditText
-                android:id="@+id/et_character_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
 
-                android:gravity="center"
-                android:hint="Who Am I?"
-                android:inputType="textCapWords"
-                android:maxLength="13"
-                android:maxLines="1" />
-
-            <!-- Save character name -->
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="editCharacterName"
-                android:text="Save" />
 
             <!--  Level -->
             <LinearLayout
@@ -137,8 +154,7 @@
         <!-- Time spent with character -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
@@ -148,7 +164,7 @@
                 android:id="@+id/plain_text_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:text="Time Spent:"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -157,7 +173,8 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center">
+                android:gravity="center"
+                >
 
 
                 <!-- First row of time table -->
@@ -166,7 +183,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal">
+                    android:gravity="center">
 
                     <!-- Time spent doing general activity -->
                     <LinearLayout
@@ -227,7 +244,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal">
+                    android:gravity="center">
 
                     <!-- Time spent strength training -->
                     <LinearLayout

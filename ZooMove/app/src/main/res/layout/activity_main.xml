@@ -4,20 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/activity_vertical_margin"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="@color/title_screen"
+    >
 
 
-    <!-- Title (common!)  -->
+    <!-- Title (common!)
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_weight="0.1"
         android:text="FurFit"
         android:textAllCaps="true"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+-->
 
     <!-- General button -->
     <Button
@@ -25,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:background="@android:color/holo_green_light"
+        android:background="@color/general_button"
         android:onClick="generalSwitch"
         android:text="General Button" />
 
@@ -36,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:background="@android:color/holo_red_light"
+        android:background="@color/run_button"
         android:onClick="runSwitch"
         android:text="Run Button" />
 
@@ -47,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:background="@android:color/holo_orange_light"
+        android:background="@color/muscle_button"
         android:onClick="muscleSwitch"
         android:text="Muscle Button" />
 
@@ -57,7 +60,7 @@
         android:id="@+id/iv_current_character"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.6"
         android:onClick="charSwitch"
         android:scaleType="fitCenter"
         android:src="@drawable/char1" />
@@ -69,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:background="@android:color/holo_purple"
+        android:background="@color/extras_button"
         android:onClick="extrasSwitch"
         android:text="Extras Button" />
 

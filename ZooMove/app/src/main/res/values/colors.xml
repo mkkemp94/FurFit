@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#ff4081</color>
+    <color name="colorPrimary">#607d8b</color>
+    <color name="colorPrimaryDark">#455a64</color>
+    <color name="colorAccent">#607d8b</color>
 
     <color name="image_border_start">#40990000</color>
     <color name="image_border_end">#660000</color>
     <color name="image_border_center">#ff3333</color>
+
+    <color name="title_screen">#29b6f6</color>
+    <color name="character_select_screen">#9ccc65</color>
+    <color name="stats_screen">#ffee58</color>
+
+    <color name="general_button">@android:color/holo_green_light</color>
+    <color name="run_button">@android:color/holo_red_light</color>
+    <color name="muscle_button">@android:color/holo_orange_light</color>
+    <color name="extras_button">@android:color/holo_purple</color>
+    <color name="white">@android:color/white</color>
 </resources>
+
+
+<!-- Old Colors
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#ff4081</color>
+-->

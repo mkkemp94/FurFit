@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">FurFit</string>
+    <string name="character_select">Character Select</string>
+    <string name="stats">Stats</string>
 
     <string-array name="characterArray">
         <item>Bear</item>

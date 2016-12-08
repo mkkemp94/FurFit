@@ -2,10 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cddc39"
-    android:padding="@dimen/activity_vertical_margin">
+    android:padding="@dimen/activity_vertical_margin"
+    android:background="@color/character_select_screen"
+    >
 
-    <!-- Title of screen (common!) -->
+    <!-- Title of screen (common!)
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
@@ -15,7 +16,7 @@
         android:layout_marginBottom="16dp"
         android:text="Char Select"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+    -->
 
     <!-- Character select grid -->
     <GridView
@@ -24,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/button_layout"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView4"
+        android:layout_alignParentTop="true"
         android:clickable="true"
         android:horizontalSpacing="10dp"
         android:numColumns="3"
@@ -47,7 +48,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:onClick="backButton"
-            android:text="Back" />
+            android:text="Back"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"
+            />
 
         <Button
             android:id="@+id/choose_button"
@@ -55,7 +59,10 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:onClick="chooseButton"
-            android:text="Choose" />
+            android:text="Choose"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"
+            />
 
         <Button
             android:id="@+id/statsButton"
@@ -63,7 +70,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:onClick="statsButton"
-            android:text="Stats" />
+            android:text="Stats"
+            android:textColor="@color/white"
+            android:background="@color/colorAccent"
+
+            />
 
     </RelativeLayout>
 

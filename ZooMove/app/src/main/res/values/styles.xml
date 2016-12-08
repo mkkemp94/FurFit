@@ -15,6 +15,10 @@
         <item name="android:scaleType">centerCrop</item>
     </style>
 
+    <style name="every_screen" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
 </resources>
 
 <!--
