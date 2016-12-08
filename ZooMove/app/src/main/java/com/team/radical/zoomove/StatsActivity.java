@@ -50,7 +50,7 @@ public class StatsActivity extends AppCompatActivity {
     {
         for (Character ch : allCharacters) {
             if (ch.getIsSelected()) {
-                Toast.makeText(this, "Character " + ch.getName() + " is selected.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Character " + ch.getName() + " is selected.", Toast.LENGTH_SHORT).show();
                 thisCharacter = ch;
             }
         }

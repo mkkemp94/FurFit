@@ -2,22 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_vertical_margin"
     android:background="@color/stats_screen"
-
-    >
-
-
-    <!-- Title of screen (common!)
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Stats"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-     -->
+    android:padding="@dimen/activity_vertical_margin">
 
     <!-- Stats -->
     <LinearLayout
@@ -26,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:gravity="center_horizontal"
         android:orientation="vertical">
@@ -36,7 +21,7 @@
             android:id="@+id/iv_character_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/charizardy"/>
+            android:src="@drawable/charizardy" />
 
         <!-- Character name -->
         <EditText
@@ -52,13 +37,10 @@
 
         <!-- Save character name -->
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/button_save_name"
+            style="@style/button_style"
             android:onClick="editCharacterName"
-            android:text="Save"
-            android:background="@color/colorAccent"
-            android:textColor="@color/white"
-            />
+            android:text="Save" />
 
         <!--  Level -->
         <LinearLayout
@@ -111,8 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_stats"
         android:gravity="center"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <!-- Time title -->
         <TextView
@@ -266,30 +247,34 @@
 
         <Button
             android:id="@+id/back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            style="@style/button_style"
+            android:layout_alignParentStart="true"
             android:onClick="backButton"
-            android:text="Back"
-            android:background="@color/colorAccent"
-            android:textColor="@color/white"
-            />
+            android:text="Back" />
 
         <Button
             android:id="@+id/choose_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/button_style"
             android:layout_centerHorizontal="true"
             android:onClick="chooseButton"
-            android:text="Choose"
-            android:background="@color/colorAccent"
-            android:textColor="@color/white"
-            />
+            android:text="Choose" />
 
     </RelativeLayout>
 
 
 </RelativeLayout>
+
+
+    <!-- Title of screen (common!)
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Stats"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+         -->
 
 
     <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:orientation="vertical"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:padding="@dimen/activity_vertical_margin" >-->
