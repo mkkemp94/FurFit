@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
 
                     android:gravity="center"
-                    android:hint="Who Am I?"
+                    android:hint="@string/who_am_i"
                     android:inputType="textCapWords"
                     android:maxLength="13"
                     android:maxLines="1" />
@@ -74,7 +74,7 @@
                     style="@style/button_style"
                     android:layout_marginStart="4dp"
                     android:onClick="editCharacterName"
-                    android:text="Save" />
+                    android:text="@string/save_button" />
 
             </LinearLayout>
             <!-- Character name -->
@@ -90,14 +90,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LV: "
+                    android:text="@string/lv"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
                     android:id="@+id/tv_character_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="@string/_0"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
             </LinearLayout>
@@ -111,14 +111,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="EXP: "
+                    android:text="@string/exp"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
                     android:id="@+id/tv_experience"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="@string/_0"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
             </LinearLayout>
@@ -140,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="Time Spent:"
+                android:text="@string/time_spent"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
@@ -172,14 +172,14 @@
                             android:id="@+id/plain_text_general"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="General: "
+                            android:text="@string/general"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <TextView
                             android:id="@+id/tv_general_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/_0"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     </LinearLayout>
@@ -197,14 +197,14 @@
                             android:id="@+id/plain_text_running"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Running: "
+                            android:text="@string/running"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <TextView
                             android:id="@+id/tv_running_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/_0"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     </LinearLayout>
@@ -233,14 +233,14 @@
                             android:id="@+id/plain_text_strength"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Strength: "
+                            android:text="@string/strength"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <TextView
                             android:id="@+id/tv_strength_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/_0"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     </LinearLayout>
@@ -258,14 +258,14 @@
                             android:id="@+id/plain_text_total_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Total: "
+                            android:text="@string/total"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <TextView
                             android:id="@+id/tv_total_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/_0"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     </LinearLayout>

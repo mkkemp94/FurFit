@@ -35,21 +35,21 @@
             style="@style/button_style"
             android:layout_alignParentStart="true"
             android:onClick="backButton"
-            android:text="Back" />
+            android:text="@string/back_button" />
 
         <Button
             android:id="@+id/choose_button"
             style="@style/button_style"
             android:layout_centerHorizontal="true"
             android:onClick="chooseButton"
-            android:text="Choose" />
+            android:text="@string/choose_button" />
 
         <Button
             android:id="@+id/statsButton"
             style="@style/button_style"
             android:layout_alignParentEnd="true"
             android:onClick="statsButton"
-            android:text="Stats" />
+            android:text="@string/stats" />
 
     </RelativeLayout>
 

@@ -8,20 +8,6 @@
     android:background="@color/title_screen"
     >
 
-
-    <!-- Title (common!)
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_weight="0.1"
-        android:text="FurFit"
-        android:textAllCaps="true"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
--->
-
     <!-- General button -->
     <Button
         android:id="@+id/generalButton"
@@ -30,7 +16,7 @@
         android:layout_weight="0.1"
         android:background="@color/general_button"
         android:onClick="generalSwitch"
-        android:text="General Button" />
+        android:text="@string/general_button" />
 
 
     <!-- Run button -->
@@ -41,7 +27,7 @@
         android:layout_weight="0.1"
         android:background="@color/run_button"
         android:onClick="runSwitch"
-        android:text="Run Button" />
+        android:text="@string/run_button" />
 
 
     <!-- Muscle button -->
@@ -52,7 +38,7 @@
         android:layout_weight="0.1"
         android:background="@color/muscle_button"
         android:onClick="muscleSwitch"
-        android:text="Muscle Button" />
+        android:text="@string/muscle_button" />
 
 
     <!-- Character icon -->
@@ -74,7 +60,7 @@
         android:layout_weight="0.1"
         android:background="@color/extras_button"
         android:onClick="extrasSwitch"
-        android:text="Extras Button" />
+        android:text="@string/extras_button" />
 
 </LinearLayout>
 

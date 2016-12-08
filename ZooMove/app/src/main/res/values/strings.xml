@@ -2,6 +2,23 @@
     <string name="app_name">FurFit</string>
     <string name="character_select">Character Select</string>
     <string name="stats">Stats</string>
+    <string name="who_am_i">Who Am I?</string>
+    <string name="save_button">Save</string>
+    <string name="lv">LV:</string>
+    <string name="_0">0</string>
+    <string name="exp">EXP:</string>
+    <string name="time_spent">Time Spent:</string>
+    <string name="general">General:</string>
+    <string name="running">Running:</string>
+    <string name="strength">Strength:</string>
+    <string name="total">Total:</string>
+    <string name="back_button">Back</string>
+    <string name="choose_button">Choose</string>
+    <string name="general_button">General Button</string>
+    <string name="run_button">Run Button</string>
+    <string name="muscle_button">Muscle Button</string>
+    <string name="extras_button">Extras Button</string>
+    <string name="stats_button">Stats</string>
 
     <string-array name="characterArray">
         <item>Bear</item>
