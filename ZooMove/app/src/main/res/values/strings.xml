@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">FurFit</string>
     <string name="character_select">Character Select</string>
-    <string name="stats">Stats</string>
+    <string name="stats">Character Stats</string>
     <string name="who_am_i">Who Am I?</string>
     <string name="save_button">Save</string>
-    <string name="lv">LV:</string>
+    <string name="lv">"LV: "</string>
     <string name="_0">0</string>
-    <string name="exp">EXP:</string>
+    <string name="exp">"EXP: "</string>
     <string name="time_spent">Time Spent:</string>
     <string name="general">General:</string>
     <string name="running">Running:</string>
