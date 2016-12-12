@@ -83,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
         // Save these new characters
         saveCharacters();
 
+        // Load the selected character
+        loadCharacters();
+
         // Commit these changes
         editor.commit();
     }
@@ -155,6 +158,16 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        loadSelectedCharacter();
+    }
+
+    /**
+     * Loads the (should be) one character that is selected
+     * @return
+     */
+
+    private void loadSelectedCharacter() {
+        // Load selected character
         for (Character ch : allCharacters) {
             if (ch.getIsSelected()) {
                 imageView = (ImageView) findViewById(R.id.iv_current_character);
@@ -197,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Go to the Character Select screen
-     *
      */
     public void charSwitch(View view)
     {
@@ -211,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
      * Back button press:
      * Minimize app. The Android system will kill it automatically when necessary.
      * (Many apps work this way.)
-     *
      */
     @Override
     public void onBackPressed()

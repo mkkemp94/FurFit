@@ -124,7 +124,7 @@ public class StatsActivity extends AppCompatActivity {
 
         // Displays general time
         strengthTime = (TextView) findViewById(R.id.tv_strength_time);
-        strengthTime.setText( String.valueOf(thisCharacter.getStrengthTime()) );
+        strengthTime.setText( String.valueOf(thisCharacter.getmStrengthTime()) );
 
         // Displays general time
         totalTime = (TextView) findViewById(R.id.tv_total_time);

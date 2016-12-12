@@ -20,11 +20,11 @@ import java.util.List;
 class CharSelectAdapter extends BaseAdapter {
 
     private Context mContext;
-    private final List<Character> characterArray;
+    private final List<Character> mCharacterArray;
 
     public CharSelectAdapter(Context c, List<Character> characterArray) {
         this.mContext = c;
-        this.characterArray = characterArray;
+        this.mCharacterArray = characterArray;
     }
 
     /**
@@ -79,7 +79,7 @@ class CharSelectAdapter extends BaseAdapter {
         final ViewHolder viewHolder = (ViewHolder) convertView.getTag();
 
         // Get the character at this position
-        Character thisCharacter = characterArray.get(position);
+        Character thisCharacter = mCharacterArray.get(position);
 
         // Mark character as favorited or not
         if (thisCharacter.getIsSelected())
@@ -144,7 +144,7 @@ class CharSelectAdapter extends BaseAdapter {
 
 //
 //
-//        final Character character = characterArray[position];
+//        final Character character = mCharacterArray[position];
 //
 //        if (convertView == null) {
 //

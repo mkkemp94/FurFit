@@ -8,49 +8,50 @@ import java.io.Serializable;
  */
 public class Character implements Serializable {
 
-    private int id;
-    private String name;
-    private int imageResource;
+    private int mCharacterId;
+    private String mName;
+    private int mImageResource;
     private boolean isSelected = false;
 
-    private int generalTime;
-    private int runningTime;
-    private int strengthTime;
+    private int mGeneralTime;
+    private int mRunningTime;
+    private int mStrengthTime;
     private int totalTime;
 
     Character (int id, String name, int imageResource)
     {
-        this.id = id;
-        this.name = name;
-        this.imageResource = imageResource;
-        this.generalTime = 100;
-        this.runningTime = 50;
-        this.strengthTime = 20;
+        this.mCharacterId = id;
+        this.mName = name;
+        this.mImageResource = imageResource;
+
+        this.mGeneralTime = 0;
+        this.mRunningTime = 0;
+        this.mStrengthTime = 0;
     }
 
     public String getName() {
-        return name;
+        return this.mName;
     }
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) { this.mName = name; }
 
     public int getImageResource() {
-        return imageResource;
+        return this.mImageResource;
     }
 
     public boolean getIsSelected() { return isSelected; }
-    public void deselect() { isSelected = false; }
-    public void select() { isSelected = true; }
+    public void deselect() { this.isSelected = false; }
+    public void select() { this.isSelected = true; }
 
     public int getRunningTime() {
-        return runningTime;
+        return this.mRunningTime;
     }
     public int getGeneralTime() {
-        return generalTime;
+        return this.mGeneralTime;
     }
-    public int getStrengthTime() {
-        return strengthTime;
+    public int getmStrengthTime() {
+        return this.mStrengthTime;
     }
     public int getTotalTime() {
-        return runningTime + generalTime + strengthTime;
+        return this.mRunningTime + this.mGeneralTime + this.mStrengthTime;
     }
 }
