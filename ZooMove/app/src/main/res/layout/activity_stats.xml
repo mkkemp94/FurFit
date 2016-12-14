@@ -24,7 +24,8 @@
             android:id="@+id/iv_character_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/charizardy" />
+            android:src="@drawable/charizardy"
+            android:paddingTop="8dp" />
 
         <!-- Character name -->
         <EditText

@@ -1,9 +1,5 @@
 package com.team.radical.zoomove;
 
-/**
- * Created by kempm on 11/25/2016.
- */
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,44 +11,67 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Class for drawing character select grid
+ * Class for drawing character select grid.
+ * Created by kempm on 11/25/2016.
  */
 class CharSelectAdapter extends BaseAdapter {
 
+    // Context of the character select activity
     private Context mContext;
-    private final List<Character> mCharacterArray;
 
-    public CharSelectAdapter(Context c, List<Character> characterArray) {
-        this.mContext = c;
-        this.mCharacterArray = characterArray;
-    }
+    // Lis of all characters
+    private final List<Character> mCharacterList;
 
     /**
-     * Count of character icons array
-     * Not really used
+     * CONSTRUCTOR
+     * @param c contect of the application this adapter is being used for
+     * @param characterList list of all selectable character
+     */
+    public CharSelectAdapter(Context c, List<Character> characterList) {
+        this.mContext = c;
+        this.mCharacterList = characterList;
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Character count.
+     * Not really used yet.
+     * @param
      */
     public int getCount() {
         return 9;
     }
 
     /**
-     * Returns this specific character icon
-     * Unimplemented here
+     * Returns this specific character icon.
+     * Not really used yet.
+     * @param position of tapped character in grid view
+     * @return character at the tapped position
      */
     public Object getItem(int position) {
-        return null;
+        return mCharacterList.get(position);
     }
 
     /**
-     * Returns this specific character id
-     * Unimplemented here
+     * Returns this specific character id.
+     * Unimplemented here.
+     * @param position of tapped character in grid view
+     * @return 0 for now
      */
     public long getItemId(int position) {
         return 0;
     }
 
+    // ---------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------
+
     /**
-     * Create a new ImageView for each item referenced by the Adapter
+     * Create a new ImageView for each item referenced by the Adapter.
+     * @param position of the tapped character
+     * @param convertView the view holding each single character item
+     * @param parent of the single character item. I think this refers to the char select activity.
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -63,31 +82,36 @@ class CharSelectAdapter extends BaseAdapter {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
             convertView = layoutInflater.inflate(R.layout.item_single_character, null);
 
-            // Get this image view and text view
-            final ImageView characterIcon = // new ImageView(mContext);
+            // Get thie Image View for the character icon
+            final ImageView imageView =
                     (ImageView) convertView.findViewById(R.id.iv_character_icon);
 
-            final TextView characterName =
+            // Get the text view for the character name
+            final TextView textView =
                     (TextView) convertView.findViewById(R.id.tv_char_name);
 
-            // Store character image and name into view holder
-            final ViewHolder viewHolder = new ViewHolder(characterIcon, characterName);
+            // Store views into a view holder for later access
+            ViewHolder viewHolder = new ViewHolder(imageView, textView);
+
+            // Set a tag to the view holder so we can access it later
             convertView.setTag(viewHolder);
         }
 
-        // Get character icon and name from view holder
-        final ViewHolder viewHolder = (ViewHolder) convertView.getTag();
+        // Get the old saved view holder's views
+        ViewHolder viewHolder = (ViewHolder) convertView.getTag();
 
-        // Get the character at this position
-        Character thisCharacter = mCharacterArray.get(position);
+        // Get the character at this tapped position
+        Character thisCharacter = mCharacterList.get(position);
 
-        // Mark character as favorited or not
-        if (thisCharacter.getIsSelected())
-            viewHolder.characterIcon.setImageResource(R.drawable.pokeball);
-        else viewHolder.characterIcon.setImageResource(thisCharacter.getImageResource());
+        // Set the image view to a pokeball if this is the selected character
+        if (thisCharacter.getIsSelected()) {
+            viewHolder.imageView.setImageResource(R.drawable.pokeball); }
 
-        // Display the character's name
-        viewHolder.characterName.setText(thisCharacter.getName());
+        // Set the image view to this character's face if not selected
+        else { viewHolder.imageView.setImageResource(thisCharacter.getImageResource()); }
+
+        // Set text view to display the character's name
+        viewHolder.textView.setText(thisCharacter.getName());
 
         // Return the updated view
         return convertView;
@@ -99,12 +123,12 @@ class CharSelectAdapter extends BaseAdapter {
      * ---------------------------------------------------------
      */
     private class ViewHolder {
-        private final ImageView characterIcon;
-        private final TextView characterName;
+        private final ImageView imageView;
+        private final TextView textView;
 
-        public ViewHolder(ImageView characterIcon, TextView characterName) {
-            this.characterIcon = characterIcon;
-            this.characterName = characterName;
+        public ViewHolder(ImageView imageView, TextView textView) {
+            this.imageView = imageView;
+            this.textView = textView;
         }
     }
 }
@@ -114,18 +138,8 @@ class CharSelectAdapter extends BaseAdapter {
 
 
 
-//        viewHolder.characterIcon.setImageResource(thisCharacter.getIsSelected() ? R.drawable.pokeball : thisCharacter.getImageResource());
-
-//        if (thisCharacter.getIsSelected()) {
-//            viewHolder.characterIcon.setImageResource(R.drawable.pokeball);
-//        } else {
-//            viewHolder.characterIcon.setImageResource(thisCharacter.getImageResource()); //characterIconArray[position]);
-//        }
 
 
-//        // To hold this specific icon
-//        ImageView imageView;
-//        TextView textView;
 
 
 
@@ -139,41 +153,3 @@ class CharSelectAdapter extends BaseAdapter {
 //            R.drawable.mareep, R.drawable.pidgeot,
 //            R.drawable.staryu
 //    };
-
-
-
-//
-//
-//        final Character character = mCharacterArray[position];
-//
-//        if (convertView == null) {
-//
-//            imageView = new ImageView(mContext);
-//            //textView = new TextView(mContext);
-//
-//            // resize and crop images
-//            //imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-//
-//            // crop to the center
-//            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//
-//            imageView.setPadding(8, 8, 8, 8);
-//        } else {
-//            imageView = (ImageView) convertView;
-//            //textView = (TextView) convertView;
-//        }
-//
-//        // If book is favorited, star it
-////            imageView.setImageResource(
-////                    character.getIsSelected() ?  R.drawable.fox : characterIconArray[position]
-////            );
-//
-//        if (character.getIsSelected()) {
-//            imageView.setImageResource(R.drawable.fox);
-//            //textView.setText("Hi");
-//        } else {
-//            imageView.setImageResource(characterIconArray[position]);
-//        }
-//
-//        //imageView.setImageResource(characterIconArray[position]);
-//        return imageView;

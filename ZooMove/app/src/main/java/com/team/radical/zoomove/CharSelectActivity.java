@@ -15,18 +15,27 @@ import java.io.ObjectOutputStream;
 
 import static android.util.Log.v;
 import static com.team.radical.zoomove.MainActivity.allCharacters;
+import static com.team.radical.zoomove.MainActivity.keepPlayingMusic;
+import static com.team.radical.zoomove.MainActivity.mMediaPlayer;
 
 /**
- * This activity holds all characters to be selected as "Current Character"
- * It is reached by clicking the character on the main menu.
- * Clicking the stats button on this page brings up the selcted character's stats.
+ * This activity holds a grid to display all characters.
+ * Tapping a character selects it and deselects all others.
+ * Clicking back goes back to the main menu without saving this character as selected.
+ * Clicking the choose button goes back to the main menu and saves this character as selected.
+ * Clicking the stats button goes to a stats page that displays this character's info.
  */
 public class CharSelectActivity extends AppCompatActivity {
 
+    // Adapter for displaying characters in a grid view
     private CharSelectAdapter charSelectAdapter;
 
+    // ---------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------
+
     /**
-     * Puts a grid view on the character select screen
+     * ON CREATE
+     * Puts a grid view on the character select screen holding all selectable characters.
      * @param savedInstanceState
      */
     public void onCreate(Bundle savedInstanceState)
@@ -38,8 +47,12 @@ public class CharSelectActivity extends AppCompatActivity {
         loadCharacterSelectGrid();
     }
 
+    // ---------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------
+
     /**
-     * Load grid of characters.
+     * Load grid of characters and set adapter for data population.
+     * @param
      */
     private void loadCharacterSelectGrid()
     {
@@ -60,6 +73,7 @@ public class CharSelectActivity extends AppCompatActivity {
     /**
      * Select the character at the tapped position.
      * Only one character should be selected at a time.
+     * @param position of tapped character
      */
     private void selectTappedCharacter(int position)
     {
@@ -76,43 +90,22 @@ public class CharSelectActivity extends AppCompatActivity {
 
     /**
      * Sets all characters to be deselected.
+     * @param
      */
-    public static void deselectAllCharacters()
+    private void deselectAllCharacters()
     {
         for (Character ch : allCharacters) {
             ch.deselect();
         }
     }
 
-    /**
-     * Go back to main menu without changing currentCharacter.
-     */
-    public void backButton(View view)
-    {
-        final Intent backIntent = new Intent(this, MainActivity.class);
-        //Bundle bundle = new Bundle();
-        //intent.putExtras(bundle);
-        startActivity(backIntent);
-
-    }
+    // ---------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------
 
     /**
-     * Go back to the main menu, saving the current tapped character as selected.
+     * Save allCharacters in their in current state.
      */
-    public void chooseButton(View view)
-    {
-        Intent intent = new Intent(this, MainActivity.class);
-        //Bundle bundle = new Bundle();
-        //intent.putExtras(bundle);
-        saveCharacters();
-
-        startActivity(intent);
-    }
-
-    /**
-     * Save allCharacters object in current state
-     */
-    public void saveCharacters()
+    private void saveCharacters()
     {
         FileOutputStream fos = null;
         try {
@@ -129,24 +122,91 @@ public class CharSelectActivity extends AppCompatActivity {
         }
     }
 
+    // ---------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------
+
     /**
-     * Go to the selected character's stats page
+     * Go back to main menu without changing currentCharacter.
+     * Keep the music playing.
      * @param view
      */
-    public void statsButton(View view)
+    public void backButton(View view)
     {
-        Intent intent = new Intent(this, StatsActivity.class);
-        //Bundle bundle = new Bundle();
-        //intent.putExtras(bundle);
+        keepPlayingMusic = true;
+        Intent backIntent = new Intent(this, MainActivity.class);
+        startActivity(backIntent);
+
+    }
+
+    /**
+     * Go back to the main menu, saving the current tapped character as selected.
+     * Keep the music playing.
+     * @param
+     */
+    public void chooseButton(View view)
+    {
+        saveCharacters();
+        keepPlayingMusic = true;
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
     /**
-     * Back button press: go to main menu
+     * Go to the selected character's stats page.
+     * Keep the music playing.
+     * @param view
+     */
+    public void statsButton(View view)
+    {
+        keepPlayingMusic = true;
+        Intent intent = new Intent(this, StatsActivity.class);
+        startActivity(intent);
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * If character select is being loaded, keepPlayingMusic will be set to true.
+     * Set the variable to false and keep playing the music.
+     * If the app is being minimized, keepPlayingMusic will be set to false.
+     * In this case, pause the music.
+     * @param
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (keepPlayingMusic) {
+            // If switching activities, this will be true. Set back to false.
+            keepPlayingMusic = false;
+        } else {
+            // If already false, we're not switching activities. We're leaving the app.
+            mMediaPlayer.pause();
+        }
+    }
+
+    /**
+     * Start the media player back up when coming back from paused state.
+     * @param
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (!mMediaPlayer.isPlaying()) { mMediaPlayer.start(); }
+    }
+
+    /**
+     * Back button press:
+     * Go back to the main menu.
+     * Set keepMusicPlaying to true so the music doesn't stop.
+     * @param
      */
     @Override
     public void onBackPressed()
     {
+        keepPlayingMusic = true;
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
