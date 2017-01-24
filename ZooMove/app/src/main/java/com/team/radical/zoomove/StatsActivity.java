@@ -17,7 +17,7 @@ import java.io.ObjectOutputStream;
 import static android.util.Log.v;
 import static com.team.radical.zoomove.MainActivity.allCharacters;
 import static com.team.radical.zoomove.MainActivity.keepPlayingMusic;
-import static com.team.radical.zoomove.MainActivity.mMediaPlayer;
+import static com.team.radical.zoomove.MainActivity.mBackgroundMediaPlayer;
 
 
 /**
@@ -144,7 +144,6 @@ public class StatsActivity extends AppCompatActivity {
             fos = openFileOutput("CF", Context.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(allCharacters);
-            //os.writeObject(currentCharacter);
             os.close();
             fos.close();
             Toast.makeText(this, "Characters saved", Toast.LENGTH_SHORT).show();
@@ -212,7 +211,7 @@ public class StatsActivity extends AppCompatActivity {
             keepPlayingMusic = false;
         } else {
             // If already false, we're not switching activities. We're leaving the app.
-            mMediaPlayer.pause();
+            mBackgroundMediaPlayer.pause();
         }
     }
 
@@ -224,7 +223,7 @@ public class StatsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (!mMediaPlayer.isPlaying()) { mMediaPlayer.start(); }
+        if (!mBackgroundMediaPlayer.isPlaying()) { mBackgroundMediaPlayer.start(); }
     }
 
     /**

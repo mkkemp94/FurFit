@@ -11,6 +11,7 @@ public class Character implements Serializable {
     private int mCharacterId;
     private String mName;
     private int mImageResource;
+    private int mCryResource;
     private boolean isSelected = false;
 
     private int mGeneralTime;
@@ -18,11 +19,12 @@ public class Character implements Serializable {
     private int mStrengthTime;
     private int totalTime;
 
-    Character (int id, String name, int imageResource)
+    Character (int id, String name, int imageResource, int cryResource)
     {
         this.mCharacterId = id;
         this.mName = name;
         this.mImageResource = imageResource;
+        this.mCryResource = cryResource;
 
         this.mGeneralTime = 0;
         this.mRunningTime = 0;
@@ -37,6 +39,8 @@ public class Character implements Serializable {
     public int getImageResource() {
         return this.mImageResource;
     }
+
+    public int getCreResource() { return this.mCryResource; }
 
     public boolean getIsSelected() { return isSelected; }
     public void deselect() { this.isSelected = false; }
@@ -53,5 +57,20 @@ public class Character implements Serializable {
     }
     public int getTotalTime() {
         return this.mRunningTime + this.mGeneralTime + this.mStrengthTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "mCharacterId=" + mCharacterId +
+                ", mName='" + mName + '\'' +
+                ", mImageResource=" + mImageResource +
+                ", mCryResource=" + mCryResource +
+                ", isSelected=" + isSelected +
+                ", mGeneralTime=" + mGeneralTime +
+                ", mRunningTime=" + mRunningTime +
+                ", mStrengthTime=" + mStrengthTime +
+                ", totalTime=" + totalTime +
+                '}';
     }
 }

@@ -44,7 +44,8 @@
             android:id="@+id/button_save_name"
             style="@style/button_style"
             android:onClick="editCharacterName"
-            android:text="@string/save_button" />
+            android:text="@string/save_button"
+            android:background="@mipmap/ic_edit"/>
 
         <!--  Level -->
         <LinearLayout

@@ -2,6 +2,8 @@ package com.team.radical.zoomove;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,10 +15,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
+import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK;
 import static android.util.Log.v;
 import static com.team.radical.zoomove.MainActivity.allCharacters;
 import static com.team.radical.zoomove.MainActivity.keepPlayingMusic;
-import static com.team.radical.zoomove.MainActivity.mMediaPlayer;
+import static com.team.radical.zoomove.MainActivity.mBackgroundMediaPlayer;
 
 /**
  * This activity holds a grid to display all characters.
@@ -30,6 +34,40 @@ public class CharSelectActivity extends AppCompatActivity {
     // Adapter for displaying characters in a grid view
     private CharSelectAdapter charSelectAdapter;
 
+    // The media player to character cries
+    private MediaPlayer mCryMediaPlayer;
+
+    // Audio manager
+    AudioManager mCryAudioManager;
+
+    // This listens for when the media finishes playing and calls a method to release resources
+    private MediaPlayer.OnCompletionListener mCompletionListener =
+            new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releaseMediaPlayer();
+        }
+    };
+
+    // Listen for audio focus changes
+    AudioManager.OnAudioFocusChangeListener mAudioFocusChangeListener =
+            new AudioManager.OnAudioFocusChangeListener() {
+        public void onAudioFocusChange(int focusChange) {
+            if (focusChange == AUDIOFOCUS_LOSS_TRANSIENT ||
+                    focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                // Pause playback
+                mCryMediaPlayer.pause();
+                mCryMediaPlayer.seekTo(0);
+            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN_TRANSIENT) {
+                // Resume playback
+                mCryMediaPlayer.start();
+            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                // Stop playback
+                releaseMediaPlayer();
+            }
+        }
+    };
+
     // ---------------------------------------------------------------------------------------------
     // ---------------------------------------------------------------------------------------------
 
@@ -42,6 +80,9 @@ public class CharSelectActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_select);
+
+        // Request audio service
+        mCryAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         // Load grid of characters with default selected
         loadCharacterSelectGrid();
@@ -84,6 +125,9 @@ public class CharSelectActivity extends AppCompatActivity {
         Character thisCharacter = allCharacters.get(position);
         thisCharacter.select();
 
+        // Play character cry
+        playCry(thisCharacter);
+
         // Redraw grid
         charSelectAdapter.notifyDataSetChanged();
     }
@@ -96,6 +140,53 @@ public class CharSelectActivity extends AppCompatActivity {
     {
         for (Character ch : allCharacters) {
             ch.deselect();
+        }
+    }
+
+    /**
+     * Play this particular character's cry
+     * @param thisCharacter is the character that was clicked
+     */
+    private void playCry(Character thisCharacter) {
+        // Request audio focus for playback
+        int result = mCryAudioManager.requestAudioFocus(mAudioFocusChangeListener,
+                // Use the music stream.
+                AudioManager.STREAM_MUSIC,
+                // Request permanent focus.
+                AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
+
+        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+            // We have audio focus now!
+
+            // Free media player just to make sure
+            releaseMediaPlayer();
+
+            // Play its cry on tap
+            mCryMediaPlayer =
+                    MediaPlayer.create(CharSelectActivity.this, thisCharacter.getCreResource());
+            mCryMediaPlayer.start();
+
+            // Listen for when audio is finished, and then release media player
+            mCryMediaPlayer.setOnCompletionListener(mCompletionListener);
+        }
+    }
+
+    /**
+     * Clean up the media player by releasing its resources.
+     */
+    private void releaseMediaPlayer() {
+        // If the media player is not null, then it may be currently playing a sound.
+        if (mCryMediaPlayer != null) {
+
+            // Release its resources because we no longer need it.
+            mCryMediaPlayer.release();
+
+            // Set the media player back to null. Makes it so the media player
+            // is not configured to play an audio file at the moment.
+            mCryMediaPlayer = null;
+
+            // Abandon audio focus
+            mCryAudioManager.abandonAudioFocus(mAudioFocusChangeListener);
         }
     }
 
@@ -112,7 +203,6 @@ public class CharSelectActivity extends AppCompatActivity {
             fos = openFileOutput("CF", Context.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(allCharacters);
-            //os.writeObject(currentCharacter);
             os.close();
             fos.close();
             Toast.makeText(this, "Characters saved", Toast.LENGTH_SHORT).show();
@@ -177,13 +267,18 @@ public class CharSelectActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
+
+
         if (keepPlayingMusic) {
             // If switching activities, this will be true. Set back to false.
             keepPlayingMusic = false;
         } else {
             // If already false, we're not switching activities. We're leaving the app.
-            mMediaPlayer.pause();
+            mBackgroundMediaPlayer.pause();
         }
+
+        // Stop playing sound!
+        releaseMediaPlayer();
     }
 
     /**
@@ -194,7 +289,7 @@ public class CharSelectActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (!mMediaPlayer.isPlaying()) { mMediaPlayer.start(); }
+        if (!mBackgroundMediaPlayer.isPlaying()) { mBackgroundMediaPlayer.start(); }
     }
 
     /**

@@ -25,7 +25,6 @@ import java.util.List;
 
 import static android.media.AudioManager.AUDIOFOCUS_LOSS;
 import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
-import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK;
 import static android.util.Log.v;
 
 /**
@@ -44,24 +43,28 @@ public class MainActivity extends AppCompatActivity {
     private String PREFS_NAME = "MyPrefsFile";
 
     // Media player to handle background music
-    public static MediaPlayer mMediaPlayer;
+    public static MediaPlayer mBackgroundMediaPlayer;
 
     // Audio manager to handle audio focus
-    private static AudioManager mAudioManager;
+    private static AudioManager mBackgroundAudioManager;
 
     // Listen for audio focus changes
-    AudioManager.OnAudioFocusChangeListener mAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+    AudioManager.OnAudioFocusChangeListener mAudioFocusChangeListener =
+            new AudioManager.OnAudioFocusChangeListener() {
         public void onAudioFocusChange(int focusChange) {
 
             if (focusChange == AUDIOFOCUS_LOSS ||
-                    focusChange == AUDIOFOCUS_LOSS_TRANSIENT ||
-                    focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                    focusChange == AUDIOFOCUS_LOSS_TRANSIENT) {
                 // Pause playback
-                mMediaPlayer.pause();
-            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                mBackgroundMediaPlayer.pause();
+            } //else if (focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                // Lower the volume
+                //mBackgroundMediaPlayer.setVolume(decreaseVolume(), decreaseVolume());
+            //}
+            else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
                 Toast.makeText(MainActivity.this, "In AUTOFOCUS_GAIN", Toast.LENGTH_SHORT);
                 // Resume playback
-                mMediaPlayer.start();
+                //mBackgroundMediaPlayer.start();
             }
         }
     };
@@ -84,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Request audio service
-        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        mBackgroundAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         // Preferences for app, with the constant name PREFS_NAME
         sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
@@ -147,15 +150,15 @@ public class MainActivity extends AppCompatActivity {
      */
     private void createBaseCharacters() {
 
-        Character char1 = new Character(1, "Beedrill", R.drawable.beedrill);
-        Character char2 = new Character(2, "Charizard", R.drawable.charizardy);
-        Character char3 = new Character(3, "Delphox", R.drawable.delphox);
-        Character char4 = new Character(4, "Flareon", R.drawable.flareon);
-        Character char5 = new Character(5, "Jolteon", R.drawable.jolteon);
-        Character char6 = new Character(6, "Squirtle", R.drawable.squirtle);
-        Character char7 = new Character(7, "Mareep", R.drawable.mareep);
-        Character char8 = new Character(8, "Pidgeot", R.drawable.pidgeot);
-        Character char9 = new Character(9, "Staryu", R.drawable.staryu);
+        Character char1 = new Character(1, "Beedrill", R.drawable.beedrill, R.raw.cry_beedrill);
+        Character char2 = new Character(2, "Charizard", R.drawable.charizardy, R.raw.cry_charizard);
+        Character char3 = new Character(3, "Delphox", R.drawable.delphox, R.raw.cry_fennekin);
+        Character char4 = new Character(4, "Flareon", R.drawable.flareon, R.raw.cry_flareon);
+        Character char5 = new Character(5, "Jolteon", R.drawable.jolteon, R.raw.cry_jolteon);
+        Character char6 = new Character(6, "Squirtle", R.drawable.squirtle, R.raw.cry_squirtle);
+        Character char7 = new Character(7, "Mareep", R.drawable.mareep, R.raw.cry_ampharos);
+        Character char8 = new Character(8, "Pidgeot", R.drawable.pidgeot, R.raw.cry_pidgeot);
+        Character char9 = new Character(9, "Staryu", R.drawable.staryu, R.raw.cry_starmie);
 
         // Put characters in a list
         allCharacters = Arrays.asList
@@ -222,7 +225,8 @@ public class MainActivity extends AppCompatActivity {
         // Look through all characters and find the ONE that is selected
         for (Character ch : allCharacters) {
             if (ch.getIsSelected()) {
-                ImageView currentCharacterImageView = (ImageView) findViewById(R.id.iv_current_character);
+                ImageView currentCharacterImageView =
+                        (ImageView) findViewById(R.id.iv_current_character);
                 currentCharacterImageView.setImageResource(ch.getImageResource());
             }
         }
@@ -239,10 +243,10 @@ public class MainActivity extends AppCompatActivity {
     private void playMusic() {
 
         // Media player hasn't been created yet (application just loaded)
-        if (mMediaPlayer == null) {
+        if (mBackgroundMediaPlayer == null) {
 
             // Request audio focus for playback
-            int result = mAudioManager.requestAudioFocus(mAudioFocusChangeListener,
+            int result = mBackgroundAudioManager.requestAudioFocus(mAudioFocusChangeListener,
                     // Use the music stream
                     AudioManager.STREAM_MUSIC,
                     // Request focus
@@ -255,13 +259,14 @@ public class MainActivity extends AppCompatActivity {
                 releaseMediaPlayer();
 
                 // Start up a new one
-                mMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.music_menu);
+                mBackgroundMediaPlayer =
+                        MediaPlayer.create(getApplicationContext(), R.raw.music_menu);
 
                 // Play it
-                mMediaPlayer.start();
+                mBackgroundMediaPlayer.start();
 
                 // We want it to loop
-                mMediaPlayer.setLooping(true);
+                mBackgroundMediaPlayer.setLooping(true);
             }
         }
     }
@@ -273,16 +278,16 @@ public class MainActivity extends AppCompatActivity {
     public void releaseMediaPlayer() {
 
         // If the media player is not null, then it may be currently playing a sound
-        if (mMediaPlayer != null) {
+        if (mBackgroundMediaPlayer != null) {
 
             // Release it's resources as we no longer need them
-            mMediaPlayer.release();
+            mBackgroundMediaPlayer.release();
 
             // Set the media player back to null
-            mMediaPlayer = null;
+            mBackgroundMediaPlayer = null;
 
             // Abandon audio focus
-            mAudioManager.abandonAudioFocus(mAudioFocusChangeListener);
+            mBackgroundAudioManager.abandonAudioFocus(mAudioFocusChangeListener);
         }
     }
 
@@ -360,7 +365,7 @@ public class MainActivity extends AppCompatActivity {
             keepPlayingMusic = false;
         } else {
             // If already false, we're not switching activities. We're leaving the app.
-            mMediaPlayer.pause();
+            mBackgroundMediaPlayer.pause();
         }
     }
 
@@ -372,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (!mMediaPlayer.isPlaying()) { mMediaPlayer.start(); }
+        if (!mBackgroundMediaPlayer.isPlaying()) { mBackgroundMediaPlayer.start(); }
     }
 
     /**
@@ -389,7 +394,33 @@ public class MainActivity extends AppCompatActivity {
         homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(homeIntent);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        //releaseMediaPlayer();
+    }
 }
+
+
+
+
+
+
+
+//
+//    float currVolume;
+//    public float decreaseVolume() {
+//        currVolume = (float) sharedPreferences.getInt("volume", 10);
+//        float maxVolume = 15.0f;
+//        float result = currVolume / maxVolume;
+//        return result;
+//    }
+//
+//    public void increaseVolume() {
+//        mBackgroundMediaPlayer.setVolume(currVolume, currVolume);
+//    }
 
 
 
