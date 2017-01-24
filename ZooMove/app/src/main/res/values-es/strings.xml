@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FurFit</string>
+    <string name="_0">0</string>
+    <string name="back_button">Regresar</string>
+    <string name="character_select">Caracteres</string>
+    <string name="choose_button">Escoger</string>
+    <string name="exp">"EXP: "</string>
+    <string name="extras_button">Extras</string>
+    <string name="general">General:</string>
+    <string name="general_button">General</string>
+    <string name="lv">"LV: "</string>
+    <string name="muscle_button">Músculo</string>
+    <string name="run_button">Correr</string>
+    <string name="running">Corriendo:</string>
+    <string name="save_button">Salvar</string>
+    <string name="stats">Estadísticas</string>
+    <string name="stats_button">Estadísticas</string>
+    <string name="strength">Fuerza:</string>
+    <string name="time_spent">Tiempo Usado:</string>
+    <string name="total">Total:</string>
+    <string name="who_am_i">¿Quién Soy?</string>
+</resources>
